@@ -1,0 +1,12 @@
+a.out
+a.out.dSYM/
+libft-unit-test/
+libft-unit-test-old/
+core
+Libftest/
+*.o
+colors.h
+moulitest/
+libft_testmains/
+libft.a
+.vscode/
