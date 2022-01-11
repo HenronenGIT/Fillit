@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 10:57:29 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/01/10 10:57:32 by hmaronen         ###   ########.fr       */
+/*   Created: 2021/12/09 13:12:49 by hmaronen          #+#    #+#             */
+/*   Updated: 2021/12/09 13:12:50 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FILLIT_H
-# define FILLIT_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 4
+# define MAX_FD 4096
+# define FD_DONT_EXIST -1
+# define L_FOUND 1
+# define L_NOT_FOUND 0
+# define NOT_FOUND 0
 
 # include "libft.h"
-# include "get_next_line.h"
-# include <fcntl.h>
 
-int	error_handler(int nb);
+int	ft_get_next_line(const int fd, char **line);
 
 #endif

@@ -94,4 +94,5 @@ void	ft_print_list(t_list *list);
 char	*ft_strndup(const char *str, size_t n);
 size_t	find_eofl(char *str);
 void	ft_realloc(char **s1, const char *s2);
+int		ft_get_next_line(const int fd, char **line);
 #endif

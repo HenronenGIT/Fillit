@@ -17,22 +17,13 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 #Source files
-SRC = ../get_next_line.c ./main.c		\
-$(TEST_PATH)/normal_with_newline.c		\
-$(TEST_PATH)/no_nl.c					\
-$(TEST_PATH)/arbitrary_fd.c				\
-$(TEST_PATH)/double_fd.c				\
-$(TEST_PATH)/long_line.c				\
-$(TEST_PATH)/basic_tests.c				\
-$(TEST_PATH)/middle_tests.c				\
-$(TEST_PATH)/advanced_tests.c			\
+SRC = ./main.c
 
 OBJ = $(SRC:.c=.o)
-TEST_PATH = ./tests
+#TEST_PATH = ./tests
 
 #Includes
 HEADERS = $(GNL_H) $(LIBFT_H) $(TEST_H)
-GNL_H = -I ../
 LIBFT_H = -I ../libft/includes
 TEST_H = -I ./includes
 
