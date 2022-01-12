@@ -15,10 +15,8 @@
 void	ft_realloc(char **s1, char const *s2)
 {
 	size_t	len;
-	size_t	i;
 	char	*temp;
 
-	i = 0;
 	if (s1 == 0 || *s2 == 0)
 		return ;
 	len = ft_strlen((char *)*s1) + ft_strlen((char *)s2);
