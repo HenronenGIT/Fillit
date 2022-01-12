@@ -5,17 +5,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "gcc - Build and debug active file",
 			"type": "cppdbg",
 			"request": "launch",
+			"name": "Debug",
 			"program": "${workspaceFolder}/fillit",
 			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "lldb",
-			"preLaunchTask": "C/C++: fillit default"
+			"cwd": "${workspaceFolder}"
 		}
 	]
 }

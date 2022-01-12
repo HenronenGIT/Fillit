@@ -23,12 +23,12 @@ OBJ = $(SRC:.c=.o)
 #TEST_PATH = ./tests
 
 #Includes
-HEADERS = $(GNL_H) $(LIBFT_H) $(TEST_H)
-LIBFT_H = -I ../libft/includes
-TEST_H = -I ./includes
+HEADERS = $(GNL_H) $(LIBFT_H) $(FILLIT_H) 
+LIBFT_H = -I ./libft/includes
+FILLIT_H = -I ./
 
 #Library
-LIB = -L ../libft -lft
+LIB = -L ./libft -lft
 
 #Remove
 RM = /bin/rm -f
@@ -36,8 +36,8 @@ RM = /bin/rm -f
 all: $(NAME)
 
 $(NAME): $(SRC)
-	@@make -C ../libft/ fclean && make -C ../libft/
-	@@$(CC) $(FLAGS) $(HEADERS) $(LIB) $(SRC) -o $(NAME)
+	@@make -C ./libft/ $(LIBFT_H) fclean && make -C ./libft/ $(LIBFT_H)
+	@@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(SRC) -o $(NAME)
 
 clean:
 	@@$(RM) $(OBJ)
