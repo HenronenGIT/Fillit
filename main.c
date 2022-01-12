@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 	int				count;
 	unsigned int	flag;
 	unsigned short	tetrimino;
-
 	
 	if (argc != 2)
 		return (error_handler(1));
@@ -67,7 +66,9 @@ int	main(int argc, char **argv)
 		if (counter == 4)
 		{
 			printf("tetrimino read\n");
-			while (!(tetrimino & 61440) && !(tetrimino & 34952))
+			while (!(tetrimino & 61440))
+				tetrimino = tetrimino << 4;
+			while (!(tetrimino & 34952))
 				tetrimino = tetrimino << 1;
 			printf("%d\n", tetrimino);
 		}
