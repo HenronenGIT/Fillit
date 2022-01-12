@@ -12,9 +12,20 @@
 
 #include "fillit.h"
 
-t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
+t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 {
 	t_tetrimino	*piece;
+
+	piece = (t_tetrimino *)malloc(sizeof(t_tetrimino));
+	piece->shape = tetrimino;
+	piece->order = piece_count;
+	piece->next = NULL;
+	return (piece);
+}
+
+t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
+{
+	static t_tetrimino	*piece;
 
 	while (!(tetrimino & left_all))
 		tetrimino = tetrimino << 4;
@@ -29,32 +40,26 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 	|| tetrimino == 35968)
 	{
 		if (piece_count == 0)
-		{
-			piece = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-			piece->shape = tetrimino;
-			piece->order = piece_count;
-			piece->next = NULL;
-		}
+			piece = new_piece(tetrimino, piece_count);
 		else
 		{
+			piece->next = new_piece(tetrimino, piece_count);
 			piece = piece->next;
-			piece = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-			piece->shape = tetrimino;
-			piece->order = piece_count;
-			piece->next = NULL;
 		}
 		return (piece);
 	}
 	return (NULL);
 }
 
-unsigned short	save_tetrimino(const char *line)
+unsigned short	save_tetrimino(const char *line, int line_counter)
 {
 	int				count;
 	unsigned int	flag;
-	unsigned short	tetrimino;
+	static unsigned short	tetrimino;
 
 	count = 0;
+	if (line_counter == 0)
+		tetrimino = 0;
 	while (*line)
 	{
 		if (*line != '#' && *line != '.')
@@ -62,7 +67,7 @@ unsigned short	save_tetrimino(const char *line)
 		else if (*line == '#')
 		{
 			flag = 1;
-			flag = flag << (15 - count);
+			flag = flag << (15 - 4 * line_counter - count);
 			tetrimino = tetrimino | flag;
 		}
 		line++;
@@ -73,30 +78,33 @@ unsigned short	save_tetrimino(const char *line)
 
 int	tetrimino_check(const int fd)
 {
-	int				line_counter;
-	int				piece_count;
-	char			*line;
+	int						line_counter;
+	int						piece_count;
+	char					*line;
 	unsigned short	tetrimino;
 	
 	tetrimino = 0;
-	line_counter = 1;
+	line_counter = 0;
 	piece_count = 0;
 	while ((ft_get_next_line(fd, &line) == 1))
 	{
-		if (line_counter == 5 && *line == '\0')
+		if (line_counter == 4 && *line == '\0')
 			line_counter = 0;
-		else
+		else if (line_counter == 4 && *line != '\0')
 			return (-1);
-		if (ft_strlen(line) != 4)
-			return (-1);
-		tetrimino = save_tetrimino(line);
-		if (line_counter == 4)
+		else 
 		{
-			if (!valid_tetrimino(tetrimino, piece_count))
+			if (ft_strlen(line) != 4)
 				return (-1);
-			piece_count++;
+			tetrimino = save_tetrimino(line, line_counter);
+			if (line_counter == 3)
+			{
+				if (!valid_tetrimino(tetrimino, piece_count))
+					return (-1);
+				piece_count++;
+			}
+			line_counter++;
 		}
-		line_counter++;
 	}
 	return (1);
 }
