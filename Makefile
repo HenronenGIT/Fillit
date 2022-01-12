@@ -17,7 +17,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 #Source files
-SRC = ./main.c
+SRC = ./main.c ./tetrimino_check.c
 
 OBJ = $(SRC:.c=.o)
 #TEST_PATH = ./tests
@@ -49,6 +49,9 @@ re: fclean all
 
 run:
 	@@./$(NAME)
+
+max:
+	@@./$(NAME) max.txt
 
 torture:
 	@@make -C ../libft/ fclean && make -C ../libft/

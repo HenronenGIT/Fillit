@@ -17,7 +17,18 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <fcntl.h>
+# define top_all 61440
+# define left_all 34952
+
+typedef struct	s_tetrimino
+{
+	unsigned short		shape;
+	unsigned int		order;
+	struct s_tetrimino	*next;
+} 						t_tetrimino;
+
 
 int	error_handler(int nb);
+int	tetrimino_check(const int fd);
 
 #endif

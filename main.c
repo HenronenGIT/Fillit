@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 int	error_handler(int nb)
 {
@@ -24,12 +23,7 @@ int	error_handler(int nb)
 
 int	main(int argc, char **argv)
 {
-	char			*line;
 	int				fd;
-	int				counter;
-	int				count;
-	unsigned int	flag;
-	unsigned short	tetrimino;
 	
 	if (argc != 2)
 		return (error_handler(1));
@@ -39,40 +33,7 @@ int	main(int argc, char **argv)
 		ft_putstr("open() error in main\n");
 		return (0);
 	}
-	tetrimino = 0;
-	counter = 1;
-	count = 0;
-	while ((ft_get_next_line(fd, &line) == 1))
-	{
-		if (counter > 4)
-			return (error_handler(2));
-		if (ft_strlen(line) != 4)
-			return (error_handler(2));
-		while (*line)
-		{
-			printf("count = %d\n", count);
-			if (*line != '#' && *line != '.')
-				return(error_handler(2));
-			else if (*line == '#')
-			{
-				flag = 1;
-				flag = flag << (15 - count);
-				tetrimino = tetrimino | flag;
-				printf("%d\n", tetrimino);
-			}
-			line++;
-			count++;
-		}
-		if (counter == 4)
-		{
-			printf("tetrimino read\n");
-			while (!(tetrimino & 61440))
-				tetrimino = tetrimino << 4;
-			while (!(tetrimino & 34952))
-				tetrimino = tetrimino << 1;
-			printf("%d\n", tetrimino);
-		}
-		counter++;
-	}
+	if (tetrimino_check(fd) == -1)
+		return (error_handler(2));
 	return (0);
 }
