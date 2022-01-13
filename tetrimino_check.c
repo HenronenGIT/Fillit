@@ -26,6 +26,7 @@ t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 {
 	static t_tetrimino	*piece;
+	t_tetrimino			*new;
 
 	if (tetrimino == 0)
 		return (NULL);
@@ -45,8 +46,9 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 			piece = new_piece(tetrimino, piece_count);
 		else
 		{
-			piece->next = new_piece(tetrimino, piece_count);
-			piece = piece->next;
+			new = new_piece(tetrimino, piece_count);
+			new->next = piece;
+			piece = new;
 		}
 		return (piece);
 	}
@@ -55,9 +57,9 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 
 int	line_check(const char *line, int line_counter)
 {
-	int						count;
-	unsigned int			flag;
-	static int				input;
+	int				count;
+	unsigned int	flag;
+	static int		input;
 
 	count = 0;
 	if (line_counter == 0)
@@ -78,12 +80,13 @@ int	line_check(const char *line, int line_counter)
 	return (input);
 }
 
-int	tetrimino_check(const int fd)
+t_tetrimino	*tetrimino_check(const int fd)
 {
 	int				line_counter;
 	int				piece_count;
 	char			*line;
 	int				tetrimino;
+	t_tetrimino		*list;
 	
 	tetrimino = 0;
 	line_counter = 0;
@@ -92,26 +95,29 @@ int	tetrimino_check(const int fd)
 	{
 		if (line_counter == 4 && *line == '\0')
 		{
+			free(line);
 			if (!ft_get_next_line(fd, &line))
-				return (-1);
+				return (NULL);
 			line_counter = 0;
 		}
 		else if (line_counter == 4 && *line != '\0')
-			return (-1);
+			return (NULL);
 		if (ft_strlen(line) != 4)
-			return (-1);
+			return (NULL);
 		tetrimino = line_check(line, line_counter);
 		if (tetrimino == -1)
-			return (-1);
+			return (NULL);
 		if (line_counter == 3)
 		{
-			if (!valid_tetrimino(tetrimino, piece_count))
-				return (-1);
+			list = valid_tetrimino(tetrimino, piece_count);
+			if (!(list))
+				return (NULL);
 			piece_count++;
 		}
+		free(line);
 		line_counter++;
 	}
-	if (line_counter != 3)
-		return (-1);
-	return (1);
+	if (line_counter != 4)
+		return (NULL);
+	return (list);
 }

@@ -29,6 +29,6 @@ typedef struct	s_tetrimino
 
 
 int	error_handler(int nb);
-int	tetrimino_check(const int fd);
+t_tetrimino	*tetrimino_check(const int fd);
 
 #endif

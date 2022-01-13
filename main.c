@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int	error_handler(int nb)
 {
@@ -23,7 +24,8 @@ int	error_handler(int nb)
 
 int	main(int argc, char **argv)
 {
-	int		fd;
+	int				fd;
+	t_tetrimino		*list;
 	
 	if (argc != 2)
 		return (error_handler(1));
@@ -33,7 +35,9 @@ int	main(int argc, char **argv)
 		ft_putstr("open() error in main\n");
 		return (0);
 	}
-	if (tetrimino_check(fd) == -1)
+	list = tetrimino_check(fd);
+	if (!(list))
 		return (error_handler(2));
+	//system("leaks fillit");
 	return (0);
 }

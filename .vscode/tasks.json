@@ -13,7 +13,9 @@
                 "-Werror",
                 "-I./libft/includes",
                 "-I./",
-                "${workspaceFolder}/*.c",
+                //"${workspaceFolder}/*.c",
+                "${workspaceFolder}/main.c",
+                "${workspaceFolder}/tetrimino_check.c",
                 "-o",
                 "${workspaceFolder}/fillit"
             ],
