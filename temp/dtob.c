@@ -14,30 +14,27 @@
 
 /*	Decimal to binary convertor */
 
-void	ft_dtob(int d)
+void	ft_dtob(int nb)
 {
-	int	b;
-	int	remain;
+	int	b[16];
+	size_t	i;
+	int	quotient;
 
-	while ()
+	quotient = 0;
+	i = 0;
+	remain = 0;
+	while ((quotient = nb / 2) != 0)
 	{
-
-		ft_putnbr(remain = (d % 2));
+		bin[i] = (nb % 2);
+		i++;
 	}
-
-
 }
 
 int	main(void)
 {
 	size_t	i;
-	int *arr = {
+	int arr[] = {
 		1,
-		2,
-		3,
-		10,
-		100,
-		1000
 		0
 	};
 

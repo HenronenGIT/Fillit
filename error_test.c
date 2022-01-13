@@ -31,10 +31,12 @@ int main(void)
 	};
 
 	i = 0;
-
 	while (file_names[i])
 	{
-		system("./fillit");
+		//system("./fillit ./test_files/short_line.txt");
+		//system("./fillit ./test_files/wrong_line.txt");
+		//system("./fillit max_line.txt");
+		execve("./fillit ",  &file_names[i], NULL);
 		i++;
 	}
 }
