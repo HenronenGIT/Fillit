@@ -14,36 +14,18 @@
 
 /*	Decimal to binary convertor */
 
-void	ft_dtob(int nb)
-{
-	int	b[16];
+void	ft_dtob(unsigned short nb)
+{	
 	size_t	i;
-	int	quotient;
-
-	quotient = 0;
-	i = 0;
-	remain = 0;
-	while ((quotient = nb / 2) != 0)
-	{
-		bin[i] = (nb % 2);
-		i++;
-	}
-}
-
-int	main(void)
-{
-	size_t	i;
-	int arr[] = {
-		1,
-		0
-	};
+	int	b[15];
 
 	i = 0;
-	while (arr[i] != 0)
+	while (i != 16)
 	{
-		ft_dtob(arr[i]);
-		ft_putchar('\n');
+		b[i] = (nb % 2);
+		nb = nb / 2;
 		i++;
 	}
-	return (0);
+	while (i-- != 0)
+		ft_putnbr(b[i]);
 }
