@@ -23,7 +23,7 @@ int	error_handler(int nb)
 
 int	main(int argc, char **argv)
 {
-	int				fd;
+	int		fd;
 	
 	if (argc != 2)
 		return (error_handler(1));
