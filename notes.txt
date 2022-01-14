@@ -4,3 +4,18 @@ Vasempaan laitaan siirto
 -63624 arvolla ylin rivi ja vasen laita ovat 1
 -26 max tetriminos
 
+int map
+
+4 bytes
+= 32 bits
+
+
+
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+
+-	Aloitetaan mahdollisimman pienesta mapista
+ 0 0
+ 0 0

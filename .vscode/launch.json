@@ -10,7 +10,9 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/fillit",
 			//"args": ["test.txt"],
-			"args": ["max.txt"],
+			//"args": ["max.txt"],
+			"args": ["3_tetriminos.txt"],
+	
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

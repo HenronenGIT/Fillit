@@ -30,9 +30,9 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 
 	if (tetrimino == 0)
 		return (NULL);
-	while (!(tetrimino & top_all))
+	while (!(tetrimino & TOP_ALL))
 		tetrimino = tetrimino << 4;
-	while (!(tetrimino & left_all))
+	while (!(tetrimino & LEFT_ALL))
 		tetrimino = tetrimino << 1;
 	if (tetrimino == 34952 || tetrimino == 61440 || tetrimino == 52224
 	|| tetrimino == 27648 || tetrimino == 35904 || tetrimino == 50688

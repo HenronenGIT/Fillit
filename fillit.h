@@ -10,25 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FILLIT_H
 # define FILLIT_H
 
 # include "libft.h"
 # include "get_next_line.h"
 # include <fcntl.h>
-# define top_all 61440
-# define left_all 34952
+# define TOP_ALL 61440
+# define LEFT_ALL 34952
 
-typedef struct	s_tetrimino
+typedef struct s_tetrimino
 {
 	unsigned short		shape;
 	unsigned int		order;
 	struct s_tetrimino	*next;
-} 						t_tetrimino;
+}						t_tetrimino;
 
-
-int	error_handler(int nb);
+int			error_handler(int nb);
 t_tetrimino	*tetrimino_check(const int fd);
+int			map(t_tetrimino *list);
+void		dtob(unsigned short nb);
 
 #endif

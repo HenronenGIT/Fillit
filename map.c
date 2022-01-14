@@ -10,8 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fillit.h"
+#include <stdio.h>
 
-int	map()
+int	map(t_tetrimino *list)
 {
+	int				map[5] = {0,0,0,0,0};
+	unsigned int	flag;
+	int				square;
+
+	square = 2;
+	flag = 1;
+	map[0] = 
 	
+	if ()
+	//printf("%d\n", list->shape);
+	return (1);
 }

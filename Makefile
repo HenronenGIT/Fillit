@@ -17,7 +17,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 #Source files
-SRC = ./main.c ./tetrimino_check.c
+SRC = ./main.c ./tetrimino_check.c ./map.c ./dtob.c
 
 OBJ = $(SRC:.c=.o)
 #TEST_PATH = ./tests
@@ -52,21 +52,5 @@ run:
 
 max:
 	@@./$(NAME) max.txt
-
-error:
-	@@$(CC) $(FLAGS) $(LIB) $(HEADERS) error_test.c -o $(NAME)
-
-torture:
-	@@make -C ../libft/ fclean && make -C ../libft/
-	@@$(CC) $(FLAGS) $(HEADERS) $(LIB) ../get_next_line.c ./tests/torture.c -o get_next_line
-
-leaks:
-	@@make -C ../libft/ fclean && make -C ../libft/
-	@@$(CC) $(FLAGS) -fsanitize=leak $(HEADERS) $(LIB) $(SRC) -o $(NAME)
-
-
-debug:
-	$(CC) -g $(FLAGS) $(SRC) $(LIB) $(HEADERS)
-	lldb
 
 .PHONY: all clean fclean re
