@@ -22,6 +22,7 @@ int	*map_tetrimino(int square, unsigned short shape)
 
 	mapped_tetrimino = (int *)malloc(sizeof(int) * square);
 	i = 0;
+
 	while (i < square)
 	{
 		mapped_tetrimino[i] = 0;

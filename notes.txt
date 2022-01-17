@@ -22,3 +22,15 @@ int map
 -	Aloitetaan mahdollisimman pienesta mapista
  0 0
  0 0
+
+ map[0] = 0000	mapped_tetrimino[0] = 1100
+ map[1] = 0000	mapped_tetrimino[1] = 1100
+ map[2] = 0000	mapped_tetrimino[2] = 0000
+ map[3] = 0000	mapped_tetrimino[3] = 0000
+
+if (map[0] & mapped_tetrimino[0] |
+	map[1] & mapped_tetrimino[1] |
+	map[2] & mapped_tetrimino[2] |
+	map[0] & mapped_tetrimino[0] |
+
+	
