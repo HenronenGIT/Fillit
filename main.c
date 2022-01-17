@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int	error_handler(int nb)
 {
@@ -35,6 +36,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	list = tetrimino_check(fd);
+	//
+	t_tetrimino	*temp;
+	temp = list;
+	while (temp)
+	{
+		printf("%d\n", temp->shape);
+		temp = temp->next;
+	}
+	//
 	if (!(list))
 		return (error_handler(2));
 	map(list);

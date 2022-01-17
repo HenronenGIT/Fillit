@@ -22,6 +22,16 @@ t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 	piece->next = NULL;
 	return (piece);
 }
+void	list_add_back(t_tetrimino **list, t_tetrimino *new)
+{
+	t_tetrimino *temp;
+
+	temp = *list;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = new;
+	new->next = NULL;
+}
 
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 {
@@ -47,8 +57,7 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 		else
 		{
 			new = new_piece(tetrimino, piece_count);
-			new->next = piece;
-			piece = new;
+			list_add_back(&piece, new);
 		}
 		return (piece);
 	}

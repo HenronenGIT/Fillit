@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dtob.c                                             :+:      :+:    :+:   */
+/*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@student.Hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 15:39:47 by hmaronen          #+#    #+#             */
-/*   Updated: 2022/01/11 15:39:49 by hmaronen         ###   ########.fr       */
+/*   Created: 2022/01/14 14:08:46 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/01/14 14:08:48 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-
-/*	Decimal to binary convertor */
-
-void	dtob(unsigned short nb)
-{	
-	size_t	i;
-	int	b[15];
+void	print_map(int nb, int side)
+{
+	int	i;
+	int	map[32];
 
 	i = 0;
-	while (i != 16)
+	//while (nb != 0) 
+	while (nb != 0) 
 	{
-		b[i] = (nb % 2);
+		map[i] = nb % 2;
 		nb = nb / 2;
 		i++;
 	}
-	while (i-- != 0)
-		ft_putnbr(b[i]);
+	while (i > 0)
+	{
+		i--;
+		ft_putnbr(map[i]);
+		if ((i % side) == 0)
+			ft_putchar('\n');
+	}
 }

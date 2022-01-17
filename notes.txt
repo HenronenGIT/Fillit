@@ -9,12 +9,15 @@ int map
 4 bytes
 = 32 bits
 
+1 1 1 0 0 0 0 0
+0 0 1 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
 
-
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
+1 1 1 1
+0 0 0 0
+0 0 0 0
+0 0 0 0
 
 -	Aloitetaan mahdollisimman pienesta mapista
  0 0
