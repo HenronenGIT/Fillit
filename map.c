@@ -71,16 +71,23 @@ int	map(t_tetrimino *list)
 	int			j;
 	int			flag;
 	int			square_check;
-	int			block_placed;
 	static int	square;
 
 	square = 4;
 	map = create_map(square);
+	int k;
+	k = 0;
+	while (k != square)
+	{
+		printf("%d\n", map[k]);
+		k++;
+	}
 	mapped_tetrimino = map_tetrimino(square, list->shape);
 	square_check = 1;
 	square_check = square_check << (15 - square);
 	i = 15;
 	j = 0;
+	//print_map(map);
 	while (j < square)
 	{
 		flag = 1;
