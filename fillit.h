@@ -29,7 +29,7 @@ typedef struct s_tetrimino
 int			error_handler(int nb);
 t_tetrimino	*tetrimino_check(const int fd);
 int			map(t_tetrimino *list);
-void		dtob(unsigned short nb);
+void		dtob(int b);
 void		print_map(int nb, int side);
 void		list_add_back(t_tetrimino **list, t_tetrimino *new);
 

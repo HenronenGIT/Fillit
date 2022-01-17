@@ -13,6 +13,7 @@
 #include "fillit.h"
 #include <stdio.h>
 
+/*Converts short tetrimino struct to int type map*/
 int	*map_tetrimino(int square, unsigned short shape)
 {
 	int				*mapped_tetrimino;
@@ -22,25 +23,35 @@ int	*map_tetrimino(int square, unsigned short shape)
 
 	mapped_tetrimino = (int *)malloc(sizeof(int) * square);
 	i = 0;
-
 	while (i < square)
 	{
 		mapped_tetrimino[i] = 0;
 		i++;
 	}
-	i = 15;
 	j = 0;
+	i = 15;
 	while (j < square)
 	{
 		flag = 1;
 		flag = flag << i;
+		//1000 0000 0000 0000
+		//2 line flag = 0001 0000 0000 0000
+		//	shape = 	1100 1100 0000 0000
+		//
+		//	flag = 		0000 1000 0000 0000
+		// shape = 		1100 1100 0000 0000
+		// line[1]	 =  	 1000 0000 0000
+		//
+		//	flag = 		0000 0100 0000 0000
+		//	line[2] = 	0000 1100 0000 0000
+
 		if (shape & flag)
-		{
 			mapped_tetrimino[j] = mapped_tetrimino[j] | flag;
-		}
 		i--;
-		if (i % 4 == 0)
+		if (i % square == 0)
 		{
+			//dtob(mapped_tetrimino[j]);
+			//i = 15;
 			j++;
 		}
 	}
@@ -77,11 +88,7 @@ int	map(t_tetrimino *list)
 	map = create_map(square);
 	int k;
 	k = 0;
-	while (k != square)
-	{
-		printf("%d\n", map[k]);
-		k++;
-	}
+
 	mapped_tetrimino = map_tetrimino(square, list->shape);
 	square_check = 1;
 	square_check = square_check << (15 - square);

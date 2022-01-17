@@ -12,13 +12,12 @@
 
 #include "fillit.h"
 
-
 /*	Decimal to binary convertor */
 
-void	dtob(unsigned short nb)
+void	dtob(int nb)
 {	
 	size_t	i;
-	int	b[15];
+	int		b[16];
 
 	i = 0;
 	while (i != 16)
@@ -29,4 +28,5 @@ void	dtob(unsigned short nb)
 	}
 	while (i-- != 0)
 		ft_putnbr(b[i]);
+	ft_putchar('\n');
 }

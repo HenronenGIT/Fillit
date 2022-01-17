@@ -4,33 +4,51 @@ Vasempaan laitaan siirto
 -63624 arvolla ylin rivi ja vasen laita ovat 1
 -26 max tetriminos
 
-int map
 
-4 bytes
-= 32 bits
+32768
+1000
+0000
+0000
+0000
 
-1 1 1 0 0 0 0 0
-0 0 1 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
+49152
 
-1 1 1 1
-0 0 0 0
-0 0 0 0
-0 0 0 0
+1100
+0000
+0000
+0000
 
--	Aloitetaan mahdollisimman pienesta mapista
- 0 0
- 0 0
+2048
 
- map[0] = 0000	mapped_tetrimino[0] = 1100
- map[1] = 0000	mapped_tetrimino[1] = 1100
- map[2] = 0000	mapped_tetrimino[2] = 0000
- map[3] = 0000	mapped_tetrimino[3] = 0000
+0000
+1000
+0000
+0000
 
-if (map[0] & mapped_tetrimino[0] |
-	map[1] & mapped_tetrimino[1] |
-	map[2] & mapped_tetrimino[2] |
-	map[0] & mapped_tetrimino[0] |
+52224
 
-	
+1100
+1100
+0000
+0000
+
+mapped_tetrimino[4] = 49152, 49152, 49152, 49152
+= 1100 0000 0000 0000, 1100 0000 0000 0000, 1100 0000 0000 0000, 1100 0000 0000 0000
+
+1.
+shape = 52224
+	1100 1100 0000 0000
+	1000 0000 0000 0000
+=	1000 0000 0000 0000
+
+2.
+shape
+	1100 1100 0000 0000
+	0100 0000 0000 0000
+=	1100 0000 0000 0000
+
+3. line 2
+shape
+	1100 1100 1100 1100
+	0010 0000 0000 0000
+=	
