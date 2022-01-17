@@ -40,7 +40,6 @@ int	*map_tetrimino(int square, unsigned short shape)
 		i--;
 		if (i % 4 == 0)
 		{
-			i = 15;
 			j++;
 		}
 	}
@@ -69,8 +68,8 @@ int	map(t_tetrimino *list)
 	int			i;
 	int			j;
 	int			flag;
+	int			count;
 	int			square_check;
-	int			block_placed;
 	static int	square;
 
 	square = 4;
@@ -78,35 +77,45 @@ int	map(t_tetrimino *list)
 	mapped_tetrimino = map_tetrimino(square, list->shape);
 	square_check = 1;
 	square_check = square_check << (15 - square);
-	i = 15;
+	i = 16;
+	count = 0;
 	j = 0;
+	// the flag variable can be put in a macro e.g. (1 << i)
 	while (j < square)
 	{
-		flag = 1;
-		flag = flag << i;
-		/*if (flag & square_check)
+		while (i-- > (15 - square))
 		{
-			j = 0;
-			while (j < square)
+			flag = 1;
+			flag = flag << i;
+			if ((flag & mapped_tetrimino[j]))
 			{
-				map[j] = map[j] ^ mapped_tetrimino[j];
-				j++;
+				if (!(map[j] & flag))
+					count++;
+				else
+				{
+					j = 0;
+					while (j < square)
+					{
+						mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
+						j++;
+					}
+					j = 0;
+					i = 16;
+					count = 0;
+				}
 			}
-		}*/
-		if ((flag & mapped_tetrimino[j]) && (!(map[j] & flag)))
-		{
-			map[j] = map[j] | flag;
-		}
-		else
-		{
-			j = 0;
-			while (j < square)
+			if (count == 4)
 			{
-				mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
-				j++;
+				j = 0;
+				while (j < square)
+				{
+					map[j] = map[j] | mapped_tetrimino[j];
+					j++;
+				}
 			}
 		}
-		i--;
+		i = 16;
+		j++;
 	}
 	//printf("%d\n", list->shape);
 	return (1);
