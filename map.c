@@ -112,21 +112,31 @@ int	mapper(t_tetrimino *list)
 				{
 					j = 0;
 					last = square - 1;
-					if (mapped_tetrimino[j] & (1 << (12 - j * square)))
+					while (j < square)
 					{
-						while (last > 0)
+						mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
+						if (mapped_tetrimino[j] & (32768 >> square))
 						{
-							mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
-							// KESKEN
+							if (j == last)
+							{
+								//map[j] = map[j] ^ (mapped_tetrimino[j] << 1);
+								return (0);
+							}
+							while (j >= 0)
+							{
+								mapped_tetrimino[j] = mapped_tetrimino[j] << 1;
+								j--;
+							}
+							while (last > 0)
+							{
+								mapped_tetrimino[last] = 0;
+								mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
+								last--;
+							}
+							mapped_tetrimino[last] = 0;
+							break ;
 						}
-					}
-					else
-					{
-						while (j < square)
-						{
-							mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
-							j++;
-						}
+						j++;
 					}
 					j = 0;
 					i = 16;
@@ -141,7 +151,15 @@ int	mapper(t_tetrimino *list)
 					map[j] = map[j] | mapped_tetrimino[j];
 					j++;
 				}
-				mapper(list->next);
+				if (mapper(list->next) == 0)
+				{
+					j = 0;
+					while (j < square)
+					{
+						map[j] = map[j] ^ mapped_tetrimino[j];
+						j++;
+					}
+				}
 			}
 		}
 		i = 16;
