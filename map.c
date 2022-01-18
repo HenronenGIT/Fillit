@@ -75,12 +75,36 @@ int	*map_tetrimino(int square, unsigned short shape)
 	return (map);
 }*/
 
+int	*max_left_shift(int *mapped_tetrimino, int square)
+{
+	int	i;
+	int	max_check;
+
+	max_check = 0;
+	i = 0;
+	while (i < square)
+	{
+		if (mapped_tetrimino[i] & 32768)
+			max_check = 1;
+		i++;
+	}
+	if (max_check == 0)
+	{
+		i = 0;
+		while (i < square)
+		{
+			mapped_tetrimino[i] = mapped_tetrimino[i] << 1;
+			i++;
+		}
+		return (max_left_shift(mapped_tetrimino, square));
+	}
+	return (mapped_tetrimino);
+}
+
 int	mapper(t_tetrimino *list)
 {
 	int				*mapped_tetrimino;
-	int				i;
 	int				j;
-	int				flag;
 	int				count;
 	int				last;
 	int				square_check;
@@ -88,82 +112,71 @@ int	mapper(t_tetrimino *list)
 	static int		square;
 
 	square = 4;
-	int k;
-	k = 0;
-
 	mapped_tetrimino = map_tetrimino(square, list->shape);
 	square_check = 1;
 	square_check = square_check << (15 - square);
-	i = 16;
 	count = 0;
 	j = 0;
 	// the flag variable can be put in a macro e.g. (1 << i)
 	while (j < square)
 	{
-		while (i-- > (15 - square))
+		if ((map[j] | mapped_tetrimino[j]) == (map[j] + mapped_tetrimino[j]))
 		{
-			flag = 1;
-			flag = flag << i;
-			if ((flag & mapped_tetrimino[j]))
+			count++;
+			j++;
+		}
+		else
+		{
+			j = 0;
+			last = square - 1;
+			while (j < square)
 			{
-				if (!(map[j] & flag))
-					count++;
-				else
+				mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
+				if (mapped_tetrimino[j] & (32768 >> square))
 				{
-					j = 0;
-					last = square - 1;
-					while (j < square)
+					if (mapped_tetrimino[last])
 					{
-						mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
-						if (mapped_tetrimino[j] & (32768 >> square))
-						{
-							if (j == last)
-							{
-								//map[j] = map[j] ^ (mapped_tetrimino[j] << 1);
-								return (0);
-							}
-							while (j >= 0)
-							{
-								mapped_tetrimino[j] = mapped_tetrimino[j] << 1;
-								j--;
-							}
-							while (last > 0)
-							{
-								mapped_tetrimino[last] = 0;
-								mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
-								last--;
-							}
-							mapped_tetrimino[last] = 0;
-							break ;
-						}
-						j++;
+						//map[j] = map[j] ^ (mapped_tetrimino[j] << 1);
+						return (0);
 					}
-					j = 0;
-					i = 16;
-					count = 0;
+					while (j >= 0)
+					{
+						mapped_tetrimino[j] = mapped_tetrimino[j] << 1;
+						j--;
+					}
+					while (last > 0)
+					{
+						mapped_tetrimino[last] = 0;
+						mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
+						last--;
+					}
+					mapped_tetrimino[last] = 0;
+					mapped_tetrimino = max_left_shift(mapped_tetrimino, square);
+					break ;
 				}
+				j++;
 			}
-			if (count == 4)
+			j = 0;
+			count = 0;
+		}
+		if (count == square)
+		{
+			j = 0;
+			while (j < square)
+			{
+				map[j] = map[j] | mapped_tetrimino[j];
+				j++;
+			}
+			if (mapper(list->next) == 0)
 			{
 				j = 0;
 				while (j < square)
 				{
-					map[j] = map[j] | mapped_tetrimino[j];
+					map[j] = map[j] ^ mapped_tetrimino[j];
 					j++;
-				}
-				if (mapper(list->next) == 0)
-				{
-					j = 0;
-					while (j < square)
-					{
-						map[j] = map[j] ^ mapped_tetrimino[j];
-						j++;
-					}
 				}
 			}
 		}
-		i = 16;
-		j++;
 	}
 	//printf("%d\n", list->shape);
 	return (1);
