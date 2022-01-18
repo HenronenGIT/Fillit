@@ -19,6 +19,7 @@ int	*map_tetrimino(int square, unsigned short shape)
 	int				*mapped_tetrimino;
 	int				i;
 	int				j;
+	int				offset;
 	int				flag;
 
 	mapped_tetrimino = (int *)malloc(sizeof(int) * square);
@@ -28,6 +29,7 @@ int	*map_tetrimino(int square, unsigned short shape)
 		mapped_tetrimino[i] = 0;
 		i++;
 	}
+	offset = 0;
 	j = 0;
 	i = 15;
 	while (j < square)
@@ -46,19 +48,19 @@ int	*map_tetrimino(int square, unsigned short shape)
 		//	line[2] = 	0000 1100 0000 0000
 
 		if (shape & flag)
-			mapped_tetrimino[j] = mapped_tetrimino[j] | flag;
-		i--;
+			mapped_tetrimino[j] = mapped_tetrimino[j] | (flag << offset);
 		if (i % square == 0)
 		{
 			//dtob(mapped_tetrimino[j]);
-			//i = 15;
+			offset += 4;
 			j++;
 		}
+		i--;
 	}
 	return (mapped_tetrimino);
 }
 
-int	*create_map(int square)
+/*int	*create_map(int square)
 {
 	int	*map;
 	int	i;
@@ -71,21 +73,21 @@ int	*create_map(int square)
 		i++;
 	}
 	return (map);
-}
+}*/
 
-int	map(t_tetrimino *list)
+int	mapper(t_tetrimino *list)
 {
-	int			*map;
-	int			*mapped_tetrimino;
-	int			i;
-	int			j;
-	int			flag;
-	int			count;
-	int			square_check;
-	static int	square;
+	int				*mapped_tetrimino;
+	int				i;
+	int				j;
+	int				flag;
+	int				count;
+	int				last;
+	int				square_check;
+	static int		map[16];
+	static int		square;
 
 	square = 4;
-	map = create_map(square);
 	int k;
 	k = 0;
 
@@ -109,10 +111,22 @@ int	map(t_tetrimino *list)
 				else
 				{
 					j = 0;
-					while (j < square)
+					last = square - 1;
+					if (mapped_tetrimino[j] & (1 << (12 - j * square)))
 					{
-						mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
-						j++;
+						while (last > 0)
+						{
+							mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
+							// KESKEN
+						}
+					}
+					else
+					{
+						while (j < square)
+						{
+							mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
+							j++;
+						}
 					}
 					j = 0;
 					i = 16;
@@ -127,6 +141,7 @@ int	map(t_tetrimino *list)
 					map[j] = map[j] | mapped_tetrimino[j];
 					j++;
 				}
+				mapper(list->next);
 			}
 		}
 		i = 16;
