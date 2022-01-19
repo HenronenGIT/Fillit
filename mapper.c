@@ -110,6 +110,8 @@ int	*move_tetrimino(int *mapped_tetrimino, int side)
 	return (mapped_tetrimino);
 }
 
+
+
 int	mapper(t_tetrimino *list)
 {
 	int				*mapped_tetrimino;
@@ -119,38 +121,28 @@ int	mapper(t_tetrimino *list)
 
 	side = 4;
 	mapped_tetrimino = map_tetrimino(side, list->shape);
-	line = 0;
-	while (line < side)
+	line = -1;
+	while (line++ < side)
 	{
 		if ((map[line] | mapped_tetrimino[line]) == (map[line] + mapped_tetrimino[line]))
-			line++;
+			map[line] = map[line] | mapped_tetrimino[line];
 		else
 		{
+			while (--line >= 0)
+				map[line] = map[line] ^ mapped_tetrimino[line];
 			mapped_tetrimino = move_tetrimino(mapped_tetrimino, side);
 			if (!(mapped_tetrimino))
 				return (0);
-			line = 0;
 		}
 		if (line == side)
 		{
-			line = 0;
-			while (line < side)
-			{
-				map[line] = map[line] | mapped_tetrimino[line];
-				line++;
-			}
 			if (mapper(list->next) == 0)
 			{
-				line = 0;
-				while (line < side)
-				{
+				while (--line >= 0)
 					map[line] = map[line] ^ mapped_tetrimino[line];
-					line++;
-				}
 				mapped_tetrimino = move_tetrimino(mapped_tetrimino, side);
 				if (!mapped_tetrimino)
 					return (0);
-				line = 0;
 			}
 		}
 	}
