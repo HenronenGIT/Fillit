@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 /*Converts short tetrimino struct to int type map*/
-int	*map_tetrimino(int square, unsigned short shape)
+int	*map_tetrimino(int square_side, unsigned short shape)
 {
 	int				*mapped_tetrimino;
 	int				i;
@@ -22,9 +22,9 @@ int	*map_tetrimino(int square, unsigned short shape)
 	int				offset;
 	int				flag;
 
-	mapped_tetrimino = (int *)malloc(sizeof(int) * square);
+	mapped_tetrimino = (int *)malloc(sizeof(int) * square_side);
 	i = 0;
-	while (i < square)
+	while (i < square_side)
 	{
 		mapped_tetrimino[i] = 0;
 		i++;
@@ -32,24 +32,14 @@ int	*map_tetrimino(int square, unsigned short shape)
 	offset = 0;
 	j = 0;
 	i = 15;
-	while (j < square)
+	while (j < square_side)
 	{
 		flag = 1;
 		flag = flag << i;
-		//1000 0000 0000 0000
-		//2 line flag = 0001 0000 0000 0000
-		//	shape = 	1100 1100 0000 0000
-		//
-		//	flag = 		0000 1000 0000 0000
-		// shape = 		1100 1100 0000 0000
-		// line[1]	 =  	 1000 0000 0000
-		//
-		//	flag = 		0000 0100 0000 0000
-		//	line[2] = 	0000 1100 0000 0000
 
 		if (shape & flag)
 			mapped_tetrimino[j] = mapped_tetrimino[j] | (flag << offset);
-		if (i % square == 0)
+		if (i % square_side == 0)
 		{
 			//dtob(mapped_tetrimino[j]);
 			offset += 4;
@@ -60,14 +50,14 @@ int	*map_tetrimino(int square, unsigned short shape)
 	return (mapped_tetrimino);
 }
 
-/*int	*create_map(int square)
+/*int	*create_map(int square_side)
 {
 	int	*map;
 	int	i;
 
-	map = (int *)malloc(sizeof(int) * square);
+	map = (int *)malloc(sizeof(int) * square_side);
 	i = 0;
-	while (i < square)
+	while (i < square_side)
 	{
 		map[i] = 0;
 		i++;
@@ -83,27 +73,28 @@ int	mapper(t_tetrimino *list)
 	int				flag;
 	int				count;
 	int				last;
-	int				square_check;
+	int				square_side_check;
 	static int		map[16];
-	static int		square;
+	static int		square_side;
 
-	square = 4;
+	square_side = 4;
 	int k;
 	k = 0;
 
-	mapped_tetrimino = map_tetrimino(square, list->shape);
-	square_check = 1;
-	square_check = square_check << (15 - square);
+	mapped_tetrimino = map_tetrimino(square_side, list->shape);
+	square_side_check = 1;
+	square_side_check = square_side_check << (15 - square_side);
 	i = 16;
 	count = 0;
 	j = 0;
 	// the flag variable can be put in a macro e.g. (1 << i)
-	while (j < square)
+	while (j < square_side)
 	{
-		while (i-- > (15 - square))
+		while (i-- > (15 - square_side))
 		{
 			flag = 1;
 			flag = flag << i;
+			//if mapped_tetrimino contains bit
 			if ((flag & mapped_tetrimino[j]))
 			{
 				if (!(map[j] & flag))
@@ -111,8 +102,8 @@ int	mapper(t_tetrimino *list)
 				else
 				{
 					j = 0;
-					last = square - 1;
-					if (mapped_tetrimino[j] & (1 << (12 - j * square)))
+					last = square_side - 1;
+					if (mapped_tetrimino[j] & (1 << (12 - j * square_side)))
 					{
 						while (last > 0)
 						{
@@ -122,7 +113,7 @@ int	mapper(t_tetrimino *list)
 					}
 					else
 					{
-						while (j < square)
+						while (j < square_side)
 						{
 							mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
 							j++;
@@ -136,7 +127,7 @@ int	mapper(t_tetrimino *list)
 			if (count == 4)
 			{
 				j = 0;
-				while (j < square)
+				while (j < square_side)
 				{
 					map[j] = map[j] | mapped_tetrimino[j];
 					j++;

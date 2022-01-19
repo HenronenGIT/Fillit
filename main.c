@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	list = tetrimino_check(fd);
 	if (!(list))
 		return (error_handler(2));
-	map(list);
+	mapper(list);
 	//system("leaks fillit");
 	return (0);
 }
