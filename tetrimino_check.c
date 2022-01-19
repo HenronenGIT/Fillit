@@ -15,13 +15,37 @@
 t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 {
 	t_tetrimino	*piece;
+	int			i;
+	int			j;
+	int			offset;
 
 	piece = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-	piece->shape = tetrimino;
+	piece->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
+	offset = 0;
+	i = 15;
+	j = 0;
+	while (j < 4)
+	{
+		piece->shape[j] = 0;
+		j++;
+	}
+	j = 0;
+	while (j < 4)
+	{
+		if (tetrimino & (1 << i))
+			piece->shape[j] = piece->shape[j] | (1 << i) << offset;
+		if (i % 4 == 0)
+		{
+			offset += 4;
+			j++;
+		}
+		i--;
+	}
 	piece->order = piece_count;
 	piece->next = NULL;
 	return (piece);
 }
+
 void	list_add_back(t_tetrimino **list, t_tetrimino *new)
 {
 	t_tetrimino *temp;
