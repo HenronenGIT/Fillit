@@ -12,23 +12,33 @@
 
 #include "libft.h"
 
-void	print_map(int nb, int side)
+#include "../libft/includes/libft.h"
+#include <stdio.h>
+
+void	print_map(int *map, int side)
 {
 	int	i;
-	int	map[32];
+	int	j;
+	int	bin[16];
 
-	i = 0;	
-	while (nb != 0) 
+	i = 0;
+	j = -1;
+	while (++j != side)
 	{
-		map[i] = nb % 2;
-		nb = nb / 2;
-		i++;
-	}
-	while (i > 0)
-	{
-		i--;
-		ft_putnbr(map[i]);
-		if ((i % side) == 0)
+		if (*map == 0)
+			printf("000000000000000\n");
+		else
+		{
+			while (*map != 0)
+			{
+				bin[i] = *map % 2;
+				*map = *map / 2;
+				i++;
+			}
+			while (--i != 0)
+				ft_putnbr(bin[i]);
 			ft_putchar('\n');
+		}
+		map++;
 	}
 }

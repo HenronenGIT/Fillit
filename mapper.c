@@ -14,17 +14,17 @@
 #include <stdio.h>
 
 /*Converts short tetrimino struct to int type map*/
-int	*map_tetrimino(int side_side, unsigned short shape)
+int	*map_tetrimino(int side, unsigned short shape)
 {
-	int				*mapped_tetrimino;
-	int				i;
-	int				j;
-	int				offset;
-	int				flag;
+	int		*mapped_tetrimino;
+	int		i;
+	int		j;
+	int		offset;
+	int		flag;
 
-	mapped_tetrimino = (int *)malloc(sizeof(int) * side_side);
+	mapped_tetrimino = (int *)malloc(sizeof(int) * side);
 	i = 0;
-	while (i < side_side)
+	while (i < side)
 	{
 		mapped_tetrimino[i] = 0;
 		i++;
@@ -32,14 +32,14 @@ int	*map_tetrimino(int side_side, unsigned short shape)
 	offset = 0;
 	j = 0;
 	i = 15;
-	while (j < side_side)
+	while (j < side)
 	{
 		flag = 1;
 		flag = flag << i;
 
 		if (shape & flag)
 			mapped_tetrimino[j] = mapped_tetrimino[j] | (flag << offset);
-		if (i % side_side == 0)
+		if (i % side == 0)
 		{
 			offset += 4;
 			j++;
@@ -110,8 +110,6 @@ int	*move_tetrimino(int *mapped_tetrimino, int side)
 	return (mapped_tetrimino);
 }
 
-
-
 int	mapper(t_tetrimino *list)
 {
 	int				*mapped_tetrimino;
@@ -146,6 +144,5 @@ int	mapper(t_tetrimino *list)
 			}
 		}
 	}
-	//printf("%d\n", list->shape);
 	return (1);
 }
