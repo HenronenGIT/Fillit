@@ -90,10 +90,11 @@ int	*max_left_shift(int *mapped_tetrimino, int side)
 	return (mapped_tetrimino);
 }
 
+
 int	mapper(t_tetrimino *list)
 {
 	int				*mapped_tetrimino;
-	int				j;
+	int				line;
 	int				count;
 	int				last;
 	int				square_side_check;
@@ -105,33 +106,35 @@ int	mapper(t_tetrimino *list)
 	square_side_check = 1;
 	square_side_check = square_side_check << (15 - side);
 	count = 0;
-	j = 0;
+	line = 0;
 	// the flag variable can be put in a macro e.g. (1 << i)
-	while (j < side)
+	//find_tetrimino();
+	while (line < side)
 	{
-		if ((map[j] | mapped_tetrimino[j]) == (map[j] + mapped_tetrimino[j]))
+		if ((map[line] | mapped_tetrimino[line]) == (map[line] + mapped_tetrimino[line]))
 		{
 			count++;
-			j++;
+			line++;
 		}
 		else
 		{
-			j = 0;
+			//tetrimino shifting
+			line = 0;
 			last = side - 1;
-			while (j < side)
+			while (line < side)
 			{
-				mapped_tetrimino[j] = mapped_tetrimino[j] >> 1;
-				if (mapped_tetrimino[j] & (32768 >> side))
+				mapped_tetrimino[line] = mapped_tetrimino[line] >> 1;
+				if (mapped_tetrimino[line] & (32768 >> side))
 				{
 					if (mapped_tetrimino[last])
 					{
 						//map[j] = map[j] ^ (mapped_tetrimino[j] << 1);
 						return (0);
 					}
-					while (j >= 0)
+					while (line >= 0)
 					{
-						mapped_tetrimino[j] = mapped_tetrimino[j] << 1;
-						j--;
+						mapped_tetrimino[line] = mapped_tetrimino[line] << 1;
+						line--;
 					}
 					while (last > 0)
 					{
@@ -143,26 +146,26 @@ int	mapper(t_tetrimino *list)
 					mapped_tetrimino = max_left_shift(mapped_tetrimino, side);
 					break ;
 				}
-				j++;
+				line++;
 			}
-			j = 0;
+			line = 0;
 			count = 0;
 		}
 		if (count == side)
 		{
-			j = 0;
-			while (j < side)
+			line = 0;
+			while (line < side)
 			{
-				map[j] = map[j] | mapped_tetrimino[j];
-				j++;
+				map[line] = map[line] | mapped_tetrimino[line];
+				line++;
 			}
 			if (mapper(list->next) == 0)
 			{
-				j = 0;
-				while (j < side)
+				line = 0;
+				while (line < side)
 				{
-					map[j] = map[j] ^ mapped_tetrimino[j];
-					j++;
+					map[line] = map[line] ^ mapped_tetrimino[line];
+					line++;
 				}
 			}
 		}
