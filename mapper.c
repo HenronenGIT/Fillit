@@ -49,21 +49,6 @@ int	*map_tetrimino(int side_side, unsigned short shape)
 	return (mapped_tetrimino);
 }
 
-/*int	*create_map(int side_side)
-{
-	int	*map;
-	int	i;
-
-	map = (int *)malloc(sizeof(int) * side_side);
-	i = 0;
-	while (i < side_side)
-	{
-		map[i] = 0;
-		i++;
-	}
-	return (map);
-}*/
-
 int	*max_left_shift(int *mapped_tetrimino, int side)
 {
 	int	i;
@@ -90,68 +75,63 @@ int	*max_left_shift(int *mapped_tetrimino, int side)
 	return (mapped_tetrimino);
 }
 
+int	*move_tetrimino(int *mapped_tetrimino, int side)
+{
+	int	last;
+	int	line;
+
+	last = 0;
+	line = 0;
+	last = side - 1;
+	while (line < side)
+	{
+		mapped_tetrimino[line] = mapped_tetrimino[line] >> 1;
+		if (mapped_tetrimino[line] & (32768 >> side))
+		{
+			if (mapped_tetrimino[last])
+				return (NULL);
+			while (line >= 0)
+			{
+				mapped_tetrimino[line] = mapped_tetrimino[line] << 1;
+				line--;
+			}
+			while (last > 0)
+			{
+				mapped_tetrimino[last] = 0;
+				mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
+				last--;
+			}
+			mapped_tetrimino[last] = 0;
+			mapped_tetrimino = max_left_shift(mapped_tetrimino, side);
+			break ;
+		}
+		line++;
+	}
+	return (mapped_tetrimino);
+}
 
 int	mapper(t_tetrimino *list)
 {
 	int				*mapped_tetrimino;
 	int				line;
-	int				count;
-	int				last;
-	int				square_side_check;
 	static int		map[16];
 	static int		side;
 
 	side = 4;
 	mapped_tetrimino = map_tetrimino(side, list->shape);
-	square_side_check = 1;
-	square_side_check = square_side_check << (15 - side);
-	count = 0;
 	line = 0;
-	// the flag variable can be put in a macro e.g. (1 << i)
-	//find_tetrimino();
 	while (line < side)
 	{
 		if ((map[line] | mapped_tetrimino[line]) == (map[line] + mapped_tetrimino[line]))
-		{
-			count++;
 			line++;
-		}
 		else
 		{
-			//tetrimino shifting
+			mapped_tetrimino = move_tetrimino(mapped_tetrimino, side);
+			if (!(mapped_tetrimino))
+				return (0);
 			line = 0;
-			last = side - 1;
-			while (line < side)
-			{
-				mapped_tetrimino[line] = mapped_tetrimino[line] >> 1;
-				if (mapped_tetrimino[line] & (32768 >> side))
-				{
-					if (mapped_tetrimino[last])
-					{
-						//map[j] = map[j] ^ (mapped_tetrimino[j] << 1);
-						return (0);
-					}
-					while (line >= 0)
-					{
-						mapped_tetrimino[line] = mapped_tetrimino[line] << 1;
-						line--;
-					}
-					while (last > 0)
-					{
-						mapped_tetrimino[last] = 0;
-						mapped_tetrimino[last] = mapped_tetrimino[last] | mapped_tetrimino[last - 1];
-						last--;
-					}
-					mapped_tetrimino[last] = 0;
-					mapped_tetrimino = max_left_shift(mapped_tetrimino, side);
-					break ;
-				}
-				line++;
-			}
-			line = 0;
-			count = 0;
 		}
-		if (count == side)
+		if (line == side)
 		{
 			line = 0;
 			while (line < side)
@@ -167,6 +147,10 @@ int	mapper(t_tetrimino *list)
 					map[line] = map[line] ^ mapped_tetrimino[line];
 					line++;
 				}
+				mapped_tetrimino = move_tetrimino(mapped_tetrimino, side);
+				if (!mapped_tetrimino)
+					return (0);
+				line = 0;
 			}
 		}
 	}
