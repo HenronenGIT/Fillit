@@ -24,6 +24,7 @@ int	error_handler(int nb)
 int	main(int argc, char **argv)
 {
 	int				fd;
+	int				side;
 	t_tetrimino		*list;
 	
 	if (argc != 2)
@@ -37,7 +38,8 @@ int	main(int argc, char **argv)
 	list = tetrimino_check(fd);
 	if (!(list))
 		return (error_handler(2));
-	mapper(list);
-	//system("leaks fillit");
+	side = 4;
+	mapper(list, side);
+	system("leaks fillit");
 	return (0);
 }
