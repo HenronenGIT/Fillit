@@ -41,6 +41,8 @@ t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 		}
 		i--;
 	}
+	piece->reset = (unsigned short *)malloc(sizeof(unsigned short) * 4);
+	ft_memcpy(piece->reset, piece->shape, 4);
 	piece->order = piece_count;
 	piece->next = NULL;
 	return (piece);

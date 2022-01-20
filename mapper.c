@@ -76,14 +76,19 @@ unsigned short	*move_tetrimino(unsigned short *shape, int side)
 
 int	mapper(t_tetrimino *list)
 {
-	int			line;
-	static int	side;
+	int						line;
+	static int				side;
 	static unsigned short	map[16];
 
 	side = 4;
 	line = -1;
 	while (line++ < side)
 	{
+		if (list->shape == NULL)
+		{
+			list->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
+			ft_memcpy(list->shape, list->reset, 4);
+		}
 		if ((map[line] | list->shape[line]) == (map[line] + list->shape[line]))
 			map[line] = map[line] | list->shape[line];
 		else
