@@ -11,7 +11,7 @@
 			"program": "${workspaceFolder}/fillit",
 			//"args": ["test.txt"],
 			//"args": ["max.txt"],
-			"args": ["3_tetriminos.txt"],
+			"args": ["5_tetriminos.txt"],
 	
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

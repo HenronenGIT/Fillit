@@ -14,7 +14,9 @@
                 "-I./libft/includes",
                 "-I./",
                 //"${workspaceFolder}/*.c",
-                "${workspaceFolder}/*.c",
+                "${workspaceFolder}/main.c",
+				"${workspaceFolder}/tetrimino_check.c",
+				"${workspaceFolder}/mapper.c",
                 "-o",
                 "${workspaceFolder}/fillit"
             ],
