@@ -53,7 +53,10 @@ unsigned short	*move_tetrimino(unsigned short *shape, int side)
 		if (shape[line] & (32768 >> side))
 		{
 			if (shape[last])
+			{
+				ft_memdel((void *)&shape);
 				return (NULL);
+			}
 			while (line >= 0)
 			{
 				shape[line] = shape[line] << 1;
@@ -97,8 +100,8 @@ int	mapper(t_tetrimino *list, int side)
 				if (list->order == 0)
 					side++;
 				list->shape = (unsigned short *)malloc(sizeof(unsigned short) * side);
-				ft_bzero(list->shape, side);
-				ft_memcpy(list->shape, list->reset, side);
+				ft_bzero(list->shape, side * 2);
+				ft_memcpy(list->shape, list->reset, 8);
 				if (list->order > 0)
 					return (0);
 			}
