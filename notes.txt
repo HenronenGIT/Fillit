@@ -5,21 +5,11 @@ Vasempaan laitaan siirto
 -26 max tetriminos
 
 
-32768
-1000 0000 0000 0000
 
-8192
-flag		= 0010 0000 0000 0000
-tetrimino	= 1100 0000 0000 0000
+3_tetriminos solution:
 
-=			= 1100 0000 0000 0000
-
-AAA.
-BBA.
+###.
+BB#.
 BB..
-####
+CCCC
 
-C C C 0 0000 0000 0000
-A A C 0 0000 0000 0000
-A A 0 0 0000 0000 0000
-B B B B 0000 0000 0000

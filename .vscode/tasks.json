@@ -15,6 +15,7 @@
                 "-I./",
                 //"${workspaceFolder}/*.c",
                 "${workspaceFolder}/*.c",
+                "${workspaceFolder}/libft/*.c",
                 "-o",
                 "${workspaceFolder}/fillit"
             ],

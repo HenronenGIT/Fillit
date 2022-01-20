@@ -87,7 +87,6 @@ int	mapper(t_tetrimino *list)
 	while (line++ < side)
 	{
 		//segfaults here
-
 		if (list->shape == NULL)
 		{
 			list->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
@@ -116,6 +115,6 @@ int	mapper(t_tetrimino *list)
 			}
 		}
 	}
-	//printf("%d\n", list->shape);
+	print_map(map, side);
 	return (1);
 }
