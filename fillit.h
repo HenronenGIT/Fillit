@@ -21,8 +21,9 @@
 
 typedef struct s_tetrimino
 {
-	unsigned short		shape;
+	unsigned short		*shape;
 	unsigned int		order;
+	unsigned short		*reset;
 	struct s_tetrimino	*next;
 }						t_tetrimino;
 
