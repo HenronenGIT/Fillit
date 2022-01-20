@@ -11,24 +11,38 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-void	print_map(int nb, int side)
+#include <stdio.h>
+void	print_map(unsigned short *map, int side)
 {
 	int	i;
-	int	map[32];
+	int	j;
+	int	k;
+	int	bin[16];
+	unsigned short	map_cpy;
 
-	i = 0;	
-	while (nb != 0) 
+	i = 0;
+	j = -1;
+	k = 0;
+	while (++j != side)
 	{
-		map[i] = nb % 2;
-		nb = nb / 2;
-		i++;
+		map_cpy = map[k];
+		if (map_cpy == 0)
+			printf("000000000000000\n");
+		else
+		{
+			while(map_cpy != 0)
+			{
+				bin[i] = map_cpy % 2;
+				map_cpy = map_cpy / 2;
+				i++;
+			}
+			while (--i != 0)
+				ft_putnbr(bin[i]);
+				ft_putchar('\n');
+		}
+		k++;
 	}
-	while (i > 0)
-	{
-		i--;
-		ft_putnbr(map[i]);
-		if ((i % side) == 0)
-			ft_putchar('\n');
-	}
+	ft_putchar('\n');
 }

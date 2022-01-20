@@ -19,20 +19,22 @@ unsigned short	*max_left_shift(unsigned short *shape, int side)
 	int	max_check;
 
 	max_check = 0;
-	i = 0;
-	while (i < side)
+	//i = 0;
+	i = -1;
+	while (++i < side)
 	{
 		if (shape[i] & 32768)
 			max_check = 1;
-		i++;
+		//i++;
 	}
 	if (max_check == 0)
 	{
-		i = 0;
-		while (i < side)
+		//i = 0;
+		i = -1;
+		while (++i < side)
 		{
 			shape[i] = shape[i] << 1;
-			i++;
+			//i++;
 		}
 		return (max_left_shift(shape, side));
 	}
@@ -84,6 +86,8 @@ int	mapper(t_tetrimino *list)
 	line = -1;
 	while (line++ < side)
 	{
+		//segfaults here
+
 		if (list->shape == NULL)
 		{
 			list->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
@@ -99,6 +103,7 @@ int	mapper(t_tetrimino *list)
 			if (!(list->shape))
 				return (0);
 		}
+		//print_map(map, side);
 		if (line == side)
 		{
 			if (mapper(list->next) == 0)
