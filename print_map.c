@@ -12,8 +12,9 @@
 
 #include "libft.h"
 #include <stdio.h>
-
+//TEMP
 #include <stdio.h>
+//TEMP
 void	print_map(unsigned short *map, int side)
 {
 	int	i;
