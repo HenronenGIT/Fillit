@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <fcntl.h>
+
 # define TOP_ALL 61440
 # define LEFT_ALL 34952
 
