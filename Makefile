@@ -18,8 +18,8 @@ FLAGS = -Wall -Wextra -Werror
 
 #Source files
 SRC = ./main.c ./tetrimino_check.c ./mapper.c ./dtob.c ./print_map.c	\
-#list_add_back.c
-
+	./map_estimater.c
+	
 OBJ = $(SRC:.c=.o)
 #TEST_PATH = ./tests
 

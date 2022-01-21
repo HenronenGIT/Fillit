@@ -4,6 +4,7 @@ Vasempaan laitaan siirto
 -63624 arvolla ylin rivi ja vasen laita ovat 1
 -26 max tetriminos
 
+move tetrimino muuunos
 
 
 3_tetriminos solution:
