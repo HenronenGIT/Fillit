@@ -40,6 +40,10 @@ int	main(int argc, char **argv)
 		return (error_handler(2)); 
 	side = map_estimater(list);
 	mapper(list, side);
+
+	side = 4;//temp
+	print_solution(list, side);
 	//system("leaks fillit");
+
 	return (0);
 }

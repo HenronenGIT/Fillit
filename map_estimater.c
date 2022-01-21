@@ -47,7 +47,7 @@ int	map_estimater(t_tetrimino *list)
 		temp_ptr = temp_ptr->next;
 	piece_count = (temp_ptr->order + 1);
 	multiplication = (piece_count * 4);
-	printf("square root of multiplication: %f\n", sqrt(multiplication));
-	printf("square root of ft_sqrt: %d\n", ft_sqrt(multiplication));
+	//printf("square root of multiplication: %f\n", sqrt(multiplication));
+	//printf("square root of ft_sqrt: %d\n", ft_sqrt(multiplication));
 	return (sqrt(multiplication));
 }
