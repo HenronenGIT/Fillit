@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	**free_2d_array(char **array)
+void	ft_free_2d_array(char **array)
 {
 	size_t	i;
 
@@ -22,6 +22,5 @@ char	**free_2d_array(char **array)
 		ft_memdel((void **)&array[i]);
 		i++;
 	}
-	ft_memdel((void **)array);
-	return (NULL);
+	ft_memdel((void **)&array);
 }

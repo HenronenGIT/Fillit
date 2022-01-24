@@ -54,5 +54,6 @@ int	print_solution(t_tetrimino *list, int side)
 		list = list->next;
 	}
 	ft_print_array(str);
+	ft_free_2d_array(str);
 	return (1);
 }
