@@ -105,27 +105,24 @@ t_tetrimino	*tetrimino_check(const int fd)
 	piece_count = 0;
 	while ((ft_get_next_line(fd, &line) == 1))
 	{
-		if (line_counter == 4 && *line == '\0')
+		if (line_counter == 4)
 		{
-			free(line);
-			if (!ft_get_next_line(fd, &line))
+			if (*line != '\0')
 				return (NULL);
-			line_counter = 0;
-		}
-		else if ((line_counter == 4 && *line != '\0') || ft_strlen(line) != 4)
-			return (NULL);
-		tetrimino = line_check(line, line_counter);
-		if (tetrimino == -1)
-			return (NULL);
-		if (line_counter == 3)
-		{
 			list = valid_tetrimino(tetrimino, piece_count);
 			if (!(list))
 				return (NULL);
 			piece_count++;
+			line_counter = 0;
+		}
+		else
+		{
+			tetrimino = line_check(line, line_counter);
+			if (tetrimino == -1)
+				return (NULL);
+			line_counter++;
 		}
 		free(line);
-		line_counter++;
 	}
 	if (line_counter != 4)
 		return (NULL);
