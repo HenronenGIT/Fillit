@@ -1,4 +1,4 @@
-Vasempaan laitaan siirto
+mVasempaan laitaan siirto
 -tarkista, onko ylimmalla rivilla 1
 -tarkista onko positioissa 15, 11, 7 ja 3 bitti 1
 -63624 arvolla ylin rivi ja vasen laita ovat 1

@@ -28,6 +28,9 @@ HEADERS = $(GNL_H) $(LIBFT_H) $(FILLIT_H)
 LIBFT_H = -I ./libft/includes
 FILLIT_H = -I ./
 
+#Paths
+FILE_PATH = ./eval_tests/valid_file/
+
 #Library
 LIB = -L ./libft -lft
 
@@ -49,20 +52,23 @@ fclean: clean
 re: fclean all
 
 1:
-	./fillit 1_tetrimino.txt
+	./fillit $(FILE_PATH)1_tetriminos.txt
 2:
-	./fillit 2_tetriminos.txt
+	./fillit $(FILE_PATH)2_tetriminos.txt
 3:
-	./fillit 3_tetrimino.txt
+	./fillit $(FILE_PATH)3_tetriminos.txt
 4:
-	./fillit 4_tetrimino.txt
+	./fillit $(FILE_PATH)4_tetriminos.txt
 5:
-	./fillit 5_tetrimino.txt
+	./fillit $(FILE_PATH)5_tetriminos.txt
 10:
-	./fillit 10_tetrimino.txt
+	./fillit $(FILE_PATH)10_tetriminos.txt
 15:
-	./fillit 15_tetrimino.txt
+	./fillit $(FILE_PATH)15_tetriminos.txt
 max:
-	./fillit max.txt
+	./fillit $(FILE_PATH)max.txt
+error:
+	@@$(CC) ./eval_tests/error_test.c -I ./libft/includes/
+	@@./a.out
 
 .PHONY: all clean fclean re
