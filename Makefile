@@ -48,10 +48,21 @@ fclean: clean
 
 re: fclean all
 
-run:
-	@@./$(NAME)
-
+1:
+	./fillit 1_tetrimino.txt
+2:
+	./fillit 2_tetriminos.txt
+3:
+	./fillit 3_tetrimino.txt
+4:
+	./fillit 4_tetrimino.txt
+5:
+	./fillit 5_tetrimino.txt
+10:
+	./fillit 10_tetrimino.txt
+15:
+	./fillit 15_tetrimino.txt
 max:
-	@@./$(NAME) max.txt
+	./fillit max.txt
 
 .PHONY: all clean fclean re
