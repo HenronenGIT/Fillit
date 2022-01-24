@@ -12,41 +12,17 @@
 
 #include "fillit.h"
 
-t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
+t_tetrimino	*save_tetrimino(unsigned short tetrimino, int piece_count)
 {
-	t_tetrimino	*piece;
-	int			i;
-	int			j;
-	int			offset;
+	t_tetrimino *new;
 
-	piece = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-	piece->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
-	offset = 0;
-	i = 15;
-	j = 0;
-	while (j < 4)
-	{
-		piece->shape[j] = 0;
-		j++;
-	}
-	j = 0;
-	while (j < 4)
-	{
-		if (tetrimino & (1 << i))
-			piece->shape[j] = piece->shape[j] | (1 << i) << offset;
-		if (i % 4 == 0)
-		{
-			offset += 4;
-			j++;
-		}
-		i--;
-	}
-	piece->reset = (unsigned short *)malloc(sizeof(unsigned short) * 4);
-	ft_bzero(piece->reset, 8);
-	ft_memcpy(piece->reset, piece->shape, 8);
-	piece->order = piece_count;
-	piece->next = NULL;
-	return (piece);
+	new = (t_tetrimino *)malloc(sizeof(t_tetrimino));
+	new->value = tetrimino;
+	new->order = piece_count;
+	new->shape = NULL;
+	new->reset = NULL;
+	new->next = NULL;
+	return (new);
 }
 
 void	list_add_back(t_tetrimino **list, t_tetrimino *new)
@@ -62,7 +38,7 @@ void	list_add_back(t_tetrimino **list, t_tetrimino *new)
 
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 {
-	static t_tetrimino	*piece;
+	static t_tetrimino	*head;
 	t_tetrimino			*new;
 
 	if (tetrimino == 0)
@@ -80,13 +56,13 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino, int piece_count)
 	|| tetrimino == 35968)
 	{
 		if (piece_count == 0)
-			piece = new_piece(tetrimino, piece_count);
+			head = save_tetrimino(tetrimino, piece_count);
 		else
 		{
-			new = new_piece(tetrimino, piece_count);
-			list_add_back(&piece, new);
+			new = save_tetrimino(tetrimino, piece_count);
+			list_add_back(&head, new);
 		}
-		return (piece);
+		return (head);
 	}
 	return (NULL);
 }

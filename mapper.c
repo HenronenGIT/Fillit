@@ -11,83 +11,73 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-//TEMP
-#include <stdio.h>
 
-unsigned short	*max_left_shift(unsigned short *shape, int side)
+void	move_line_down(t_tetrimino *list, int side)
 {
-	int	i;
-	int	max_check;
+	int	j;
+	int	previous_top;
 
-	max_check = 0;
-	//i = 0;
-	i = -1;
-	while (++i < side)
+	j = side - 1;
+	while (j >= 0)
 	{
-		if (shape[i] & 32768)
-			max_check = 1;
-		//i++;
-	}
-	if (max_check == 0)
-	{
-		//i = 0;
-		i = -1;
-		while (++i < side)
+		if (list->shape[j])
 		{
-			shape[i] = shape[i] << 1;
-			//i++;
+			previous_top = j;
+			list->shape[j] = 0;
 		}
-		return (max_left_shift(shape, side));
+		j--;
 	}
-	return (shape);
+	previous_top++;
+	while (++j < 4)
+	{
+		if (list->reset[j])
+			list->shape[previous_top] = list->shape[previous_top] | list->reset[j];
+		previous_top++;
+	}
 }
 
-unsigned short	*move_tetrimino(unsigned short *shape, int side)
+void	move_tetrimino(t_tetrimino *list, int side)
 {
+	int	j;
 	int	last;
-	int	line;
+	int	eol;
+	int	eom;
 
-	last = 0;
-	line = 0;
+	j = 0;
 	last = side - 1;
-	while (line < side)
+	eol = 0;
+	eom = 0;
+	while (j < side)
 	{
-		shape[line] = shape[line] >> 1;
-		if (shape[line] & (32768 >> side))
-		{
-			if (shape[last])
-			{
-				ft_memdel((void *)&shape);
-				return (NULL);
-			}
-			while (line >= 0)
-			{
-				shape[line] = shape[line] << 1;
-				line--;
-			}
-			while (last > 0)
-			{
-				shape[last] = 0;
-				shape[last] = shape[last] | shape[last - 1];
-				last--;
-			}
-			shape[last] = 0;
-			shape = max_left_shift(shape, side);
-			break ;
-		}
-		line++;
+		if (list->shape[j] && (list->shape[j] & (32768 >> last)))
+			eol = 1;
+		if (eol && list->shape[last])
+			eom = 1;
+		j++;
 	}
-	return (shape);
+	if (eom)
+		ft_memdel((void *)&list->shape);
+	else if (eol)
+		move_line_down(list, side);
+	else
+	{
+		while (--j >= 0)
+			list->shape[j] = list->shape[j] >> 1;
+	}
 }
 
 int	mapper(t_tetrimino *list, int side)
 {
 	int						line;
+	int 					temp;
 	static unsigned short	map[16];
 
 	line = 0;
+	temp = 0;
 	while (list)
 	{
+		if (list->order == 2)
+			temp = -1;
 		if (((map[line] | list->shape[line]) != (map[line] + list->shape[line])) || line == side)
 		{
 			if (line == side)
@@ -97,16 +87,22 @@ int	mapper(t_tetrimino *list, int side)
 			}
 			while (--line >= 0)
 				map[line] = map[line] ^ list->shape[line];
-			list->shape = move_tetrimino(list->shape, side);
+			move_tetrimino(list, side);
 			if (list->shape == NULL)
 			{
 				if (list->order == 0)
 					side++;
 				list->shape = (unsigned short *)malloc(sizeof(unsigned short) * side);
-				ft_bzero(list->shape, side * 2);
-				ft_memcpy(list->shape, list->reset, 8);
+				//ft_bzero(list->shape, side * 2);
+				while (++line < side)
+					list->shape[line] = 0;
+				//ft_memcpy(list->shape, list->reset, 8);
+				line = -1;
+				while (list->reset[++line])
+					list->shape[line] = list->reset[line];
 				if (list->order > 0)
 					return (0);
+				line = -1;
 			}
 		}
 		else
