@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>//temp
 
 void	ft_bdot(void *s, int n)
 {
@@ -20,26 +19,6 @@ void	ft_bdot(void *s, int n)
 	i = -1;
 	while (++i != n)
 		((char *)s)[i] = '.';
-}
-//add to libft
-char	**ft_arrnew(size_t str, size_t str_len)
-{
-	char	**arr;
-	int		i;
-
-	i = -1;
-	arr = (char **)malloc(sizeof(char *) * (str + 1));
-	if (!arr)
-		return (NULL);
-	arr[str] = NULL;
-	while (++i != (int)str)
-	{
-		arr[i] = ft_strnew(str_len);
-		if (!arr[i])
-			return (NULL);
-		ft_bzero(arr[i], str_len);
-	}
-	return (arr);
 }
 
 int	print_solution(t_tetrimino *list, int side)
@@ -65,7 +44,7 @@ int	print_solution(t_tetrimino *list, int side)
 		{
 			while (++str_index != side && --bit_index)
 			{
-				if (list->shape[line] & (1 << bit_index))
+				if (list->shape[line] & (1 << (bit_index)))
 					str[line][str_index] = 'A' + list->order;
 			}
 			str_index = -1;

@@ -23,12 +23,9 @@ t_tetrimino *new_piece(unsigned short tetrimino, int piece_count)
 	piece->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
 	offset = 0;
 	i = 15;
-	j = 0;
-	while (j < 4)
-	{
+	j = -1;
+	while (++j < 4)
 		piece->shape[j] = 0;
-		j++;
-	}
 	j = 0;
 	while (j < 4)
 	{
@@ -136,9 +133,7 @@ t_tetrimino	*tetrimino_check(const int fd)
 				return (NULL);
 			line_counter = 0;
 		}
-		else if (line_counter == 4 && *line != '\0')
-			return (NULL);
-		if (ft_strlen(line) != 4)
+		else if ((line_counter == 4 && *line != '\0') || ft_strlen(line) != 4)
 			return (NULL);
 		tetrimino = line_check(line, line_counter);
 		if (tetrimino == -1)
