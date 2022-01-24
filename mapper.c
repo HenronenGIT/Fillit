@@ -20,23 +20,17 @@ unsigned short	*max_left_shift(unsigned short *shape, int side)
 	int	max_check;
 
 	max_check = 0;
-	//i = 0;
 	i = -1;
 	while (++i < side)
 	{
 		if (shape[i] & 32768)
 			max_check = 1;
-		//i++;
 	}
 	if (max_check == 0)
 	{
-		//i = 0;
 		i = -1;
 		while (++i < side)
-		{
 			shape[i] = shape[i] << 1;
-			//i++;
-		}
 		return (max_left_shift(shape, side));
 	}
 	return (shape);
