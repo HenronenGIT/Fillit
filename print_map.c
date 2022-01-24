@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-//TEMP
-#include <stdio.h>
-//TEMP
+
 void	print_map(unsigned short *map, int side)
 {
 	int	i;
@@ -30,7 +27,7 @@ void	print_map(unsigned short *map, int side)
 	{
 		map_cpy = map[k];
 		if (map_cpy == 0)
-			printf("000000000000000\n");
+			ft_putstr("000000000000000\n");
 		else
 		{
 			while(map_cpy != 0)
@@ -41,7 +38,7 @@ void	print_map(unsigned short *map, int side)
 			}
 			while (--i != 0)
 				ft_putnbr(bin[i]);
-				ft_putchar('\n');
+			ft_putchar('\n');
 		}
 		k++;
 	}

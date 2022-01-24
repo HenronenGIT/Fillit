@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include <fcntl.h>
+
 # define TOP_ALL 61440
 # define LEFT_ALL 34952
 
@@ -34,4 +35,5 @@ void		dtob(int b);
 void		print_map(unsigned short *map, int side);
 void		list_add_back(t_tetrimino **list, t_tetrimino *new);
 int			map_estimater(t_tetrimino *list);
+int		print_solution(t_tetrimino *list, int side);
 #endif

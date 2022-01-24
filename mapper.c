@@ -109,6 +109,6 @@ int	mapper(t_tetrimino *list, int side)
 			map[line] = map[line] | list->shape[line];
 		line++;
 	}
-	print_map(map, side);
+	//print_map(map, side);
 	return (1);
 }
