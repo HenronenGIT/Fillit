@@ -53,7 +53,7 @@ int main(void)
 		system("./fillit ./eval_tests/test_files/error_file/error_20");
 		system("./fillit ./eval_tests/test_files/error_file/error_21");
 		system("./fillit ./eval_tests/test_files/error_file/error_22");
-		system("./fillit ./eval_tests/test_files/error_file/error_23");
-		system("./fillit ./eval_tests/test_files/error_file/error_24");
-		system("./fillit ./eval_tests/test_files/error_file/error_25");
+		system("./fillit ./1eval_tests/test_files/error_file/error_23");
+		system("./fillit ./1eval_tests/test_files/error_file/error_24");
+		system("./fillit ./1eval_tests/test_files/error_file/error_25");
 }
