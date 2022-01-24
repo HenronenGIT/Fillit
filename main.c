@@ -39,9 +39,8 @@ int	main(int argc, char **argv)
 	if (!(list))
 		return (error_handler(2)); 
 	side = map_estimater(list);
-	mapper(list, side);
+	side = mapper(list, side);
 
-	side = 4;//temp
 	if (!print_solution(list, side))
 		return (error_handler(2));
 	//system("leaks fillit");

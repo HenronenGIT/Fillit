@@ -78,12 +78,14 @@ int	mapper(t_tetrimino *list, int side)
 	{
 		if (list->order == 2)
 			temp = -1;
-		if (((map[line] | list->shape[line]) != (map[line] + list->shape[line])) || line == side)
+		if (((map[line] | list->shape[line]) != (map[line] + list->shape[line]))
+		|| (((32768 >> side) & list->shape[line]))
+		|| line == side)
 		{
 			if (line == side)
 			{
 				if (mapper(list->next, side))
-					return (1);
+					return (side);
 			}
 			while (--line >= 0)
 				map[line] = map[line] ^ list->shape[line];
@@ -110,5 +112,5 @@ int	mapper(t_tetrimino *list, int side)
 		line++;
 	}
 	//print_map(map, side);
-	return (1);
+	return (side);
 }
