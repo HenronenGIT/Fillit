@@ -44,6 +44,5 @@ int	main(int argc, char **argv)
 	if (!print_solution(list, side))
 		return (error_handler(2));
 	//system("leaks fillit");
-
 	return (0);
 }
