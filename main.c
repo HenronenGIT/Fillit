@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		return (error_handler(2)); 
 	side = map_estimater(list);
 	side = mapper(list, side);
-
+	
 	if (!print_solution(list, side))
 		return (error_handler(2));
 	//system("leaks fillit");
