@@ -73,9 +73,11 @@ int	line_check(const char *line, int line_counter)
 	unsigned int	flag;
 	static int		input;
 
-	count = 0;
+	if (ft_strlen(line) != 4)
+		return (-1);
 	if (line_counter == 0)
 		input = 0;
+	count = 0;
 	while (*line)
 	{
 		if (*line != '#' && *line != '.')
@@ -109,10 +111,6 @@ t_tetrimino	*tetrimino_check(const int fd)
 		{
 			if (*line != '\0')
 				return (NULL);
-			list = valid_tetrimino(tetrimino, piece_count);
-			if (!(list))
-				return (NULL);
-			piece_count++;
 			line_counter = 0;
 		}
 		else
@@ -121,6 +119,13 @@ t_tetrimino	*tetrimino_check(const int fd)
 			if (tetrimino == -1)
 				return (NULL);
 			line_counter++;
+		}
+		if (line_counter == 4)
+		{
+			list = valid_tetrimino(tetrimino, piece_count);
+			if (!(list))
+				return (NULL);
+			piece_count++;
 		}
 		free(line);
 	}
