@@ -36,5 +36,5 @@ void		dtob(int b);
 void		print_map(unsigned short *map, int side);
 void		list_add_back(t_tetrimino **list, t_tetrimino *new);
 int			map_estimater(t_tetrimino *list);
-int		print_solution(t_tetrimino *list, int side);
+int			print_solution(t_tetrimino *list, int side);
 #endif

@@ -11,35 +11,28 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-//TEMP
-#include <math.h>
-//TEMP
-#include <stdio.h>
-//TEMP
 
 void	set_list(t_tetrimino *list, int side)
 {
 	int	i;
 	int	j;
-	int offset;
+	int	offset;
 
 	while (list)
 	{
 		list->shape = (unsigned short *)malloc(sizeof(unsigned short) * side);
 		ft_bzero(list->shape, side * 2);
 		offset = 0;
-		i = 15;
+		i = 16;
 		j = 0;
-		while (j < 4)
+		while (j < 4 && --i)
 		{
 			if (list->value & (1 << i))
 				list->shape[j] = list->shape[j] | (1 << i) << offset;
 			if (i % 4 == 0)
-			{
 				offset += 4;
+			if (i % 4 == 0)
 				j++;
-			}
-			i--;
 		}
 		list->reset = (unsigned short *)malloc(sizeof(unsigned short) * side);
 		ft_bzero(list->reset, side * 2);

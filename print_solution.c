@@ -42,7 +42,7 @@ int	print_solution(t_tetrimino *list, int side)
 	{
 		while (++line != side)
 		{
-			while (++str_index != side && --bit_index)
+ 			while (++str_index != side && --bit_index)
 			{
 				if (list->shape[line] & (1 << (bit_index)))
 					str[line][str_index] = 'A' + list->order;

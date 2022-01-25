@@ -95,6 +95,8 @@ char	*ft_strndup(const char *str, size_t n);
 size_t	find_eofl(char *str);
 void	ft_realloc(char **s1, const char *s2);
 int		ft_get_next_line(const int fd, char **line);
+
 char	**ft_arrnew(size_t str_count, size_t str_len);
 void	ft_free_2d_array(char **array);
+
 #endif
