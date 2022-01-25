@@ -22,14 +22,6 @@
 
 int main(void)
 {
-	/*	Add test file name here	*/
-	//char	*file_names[] = {
-	//	"max.txt",
-	//	"short_line.txt",
-	//	"wrong_char.txt",
-	//	NULL
-	//};
-
 		system("./fillit ./eval_tests/test_files/error_file/error_0");
 		system("./fillit ./eval_tests/test_files/error_file/error_1");
 		system("./fillit ./eval_tests/test_files/error_file/error_2");
@@ -53,7 +45,7 @@ int main(void)
 		system("./fillit ./eval_tests/test_files/error_file/error_20");
 		system("./fillit ./eval_tests/test_files/error_file/error_21");
 		system("./fillit ./eval_tests/test_files/error_file/error_22");
-		system("./fillit ./1eval_tests/test_files/error_file/error_23");
-		system("./fillit ./1eval_tests/test_files/error_file/error_24");
-		system("./fillit ./1eval_tests/test_files/error_file/error_25");
+		system("./fillit ./eval_tests/test_files/error_file/error_23");
+		system("./fillit ./eval_tests/test_files/error_file/error_24");
+		system("./fillit ./eval_tests/test_files/error_file/error_25");
 }

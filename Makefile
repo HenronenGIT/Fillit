@@ -17,8 +17,8 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 #Source files
-SRC = ./main.c ./tetrimino_check.c ./mapper.c ./dtob.c ./print_map.c	\
-	./map_estimater.c ./print_solution.c
+SRC = ./main.c ./tetrimino_check.c ./mapper.c ./dtob.c ./map_estimater.c	\
+./print_solution.c
 	
 OBJ = $(SRC:.c=.o)
 #TEST_PATH = ./tests

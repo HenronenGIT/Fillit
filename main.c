@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	int				fd;
 	int				side;
 	t_tetrimino		*list;
-	
+
 	if (argc != 2)
 		return (error_handler(1));
 	fd = open(argv[1], O_RDONLY);
@@ -37,12 +37,10 @@ int	main(int argc, char **argv)
 	}
 	list = tetrimino_check(fd);
 	if (!(list))
-		return (error_handler(2)); 
+		return (error_handler(2));
 	side = map_estimater(list);
 	side = mapper(list, side);
-	
 	if (!print_solution(list, side))
 		return (error_handler(2));
-	//system("leaks fillit");
 	return (0);
 }
