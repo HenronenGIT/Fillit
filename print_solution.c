@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 static void	ft_bdot(void *s, int n)
 {
@@ -21,18 +22,17 @@ static void	ft_bdot(void *s, int n)
 		((char *)s)[i] = '.';
 }
 
-static char	**allocate_map(int line_count, int line_len)
+static int	allocate_map(char ***char_map, int line_count, int line_len)
 {
-	char	**map;
 	int		i;
 
 	i = -1;
-	map = ft_arrnew(line_count, line_len);
-	if (!map)
-		return (NULL);
+	*char_map = ft_arrnew(line_count, line_len);
+	if (!char_map)
+		return (-1);
 	while (++i != line_count)
-		ft_bdot((char *)map[i], line_count);
-	return (map);
+		ft_bdot((char *)*char_map[i], line_count);
+	return (1);
 }
 
 int	print_solution(t_tetrimino *list, int side)
@@ -42,7 +42,12 @@ int	print_solution(t_tetrimino *list, int side)
 	int		bit_index;
 	int		char_index;
 
-	map = allocate_map(side, side);
+	//map = allocate_map(side, side);
+	//if (!map)
+	//	return (-1);
+
+	if (!allocate_map(&map, side, side))
+		return (-1);
 	while (list)
 	{
 		line = -1;
