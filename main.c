@@ -37,10 +37,9 @@ int	main(int argc, char **argv)
 	}
 	list = tetrimino_check(fd);
 	if (!(list))
-		return (error_handler(2)); 
+		return (error_handler(2));
 	side = map_estimater(list);
 	side = mapper(list, side);
-	
 	if (!print_solution(list, side))
 		return (error_handler(2));
 	//system("leaks fillit");
