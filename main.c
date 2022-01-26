@@ -42,6 +42,5 @@ int	main(int argc, char **argv)
 	side = mapper(list, side);
 	if (!print_solution(list, side))
 		return (error_handler(2));
-	//system("leaks fillit ./eval_tests_valid_file/2_tetriminos.txt");
 	return (0);
 }

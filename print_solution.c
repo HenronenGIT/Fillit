@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 static void	ft_bdot(void *s, int n)
 {
@@ -30,7 +29,6 @@ int	allocate_map(char ***map, int line_count, int line_len)
 	*map = (char **)malloc(sizeof(char *) * line_count + 1);
 	if (!(*map))
 		return (0);
-	//map[line_count] = NULL;
 	while (i != line_count)
 	{
 		(*map)[i] = ft_strnew(line_len);
