@@ -32,8 +32,6 @@ typedef struct s_tetrimino
 int			error_handler(int nb);
 t_tetrimino	*tetrimino_check(const int fd);
 int			mapper(t_tetrimino *list, int side);
-void		dtob(int b);
-void		list_add_back(t_tetrimino **list, t_tetrimino *new);
 int			map_estimater(t_tetrimino *list);
 int			print_solution(t_tetrimino *list, int side);
 #endif
