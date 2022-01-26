@@ -30,7 +30,7 @@ int	allocate_map(char ***map, int line_count, int line_len)
 	*map = (char **)malloc(sizeof(char *) * line_count + 1);
 	if (!(*map))
 		return (0);
-	//map[line_count] = NULL;
+	(*map)[line_count] = NULL;
 	while (i != line_count)
 	{
 		(*map)[i] = ft_strnew(line_len);
@@ -66,7 +66,7 @@ int	print_solution(t_tetrimino *list, int side)
 		}
 		list = list->next;
 	}
-	ft_print_array(map);
+ 	ft_print_array(map);
 	ft_free_2d_array(map);
 	return (1);
 }

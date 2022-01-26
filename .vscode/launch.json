@@ -12,7 +12,8 @@
 			//"args": ["./eval_tests/valid_file/test.txt"],
 			//"args": ["./eval_tests/valid_file/max.txt"],
 			//"args": ["./eval_tests/valid_file/1_tetrimino.txt"],
-			"args": ["./eval_tests/valid_file/2_tetriminos.txt"],
+			//"args": ["./eval_tests/valid_file/2_tetriminos.txt"],
+			"args": ["./eval_tests/valid_file/custom_tetriminos.txt"],
 	
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

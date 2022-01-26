@@ -13,9 +13,8 @@
                 "-Werror",
                 "-I./libft/includes",
                 "-I./",
-                //"${workspaceFolder}/*.c",
                 "${workspaceFolder}/*.c",
-                "${workspaceFolder}/libft/*.c",
+                //"${workspaceFolder}/libft/*.c",
                 "-o",
                 "${workspaceFolder}/fillit"
             ],
