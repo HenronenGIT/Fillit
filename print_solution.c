@@ -22,16 +22,34 @@ static void	ft_bdot(void *s, int n)
 		((char *)s)[i] = '.';
 }
 
-static int	allocate_map(char ***char_map, int line_count, int line_len)
-{
-	int		i;
+//static int	allocate_map(char ***map, int line_count, int line_len)
+//{
+//	int		i;
 
-	i = -1;
-	*char_map = ft_arrnew(line_count, line_len);
-	if (!char_map)
-		return (-1);
-	while (++i != line_count)
-		ft_bdot((char *)*char_map[i], line_count);
+//	i = -1;
+//	*map = ft_arrnew(line_count, line_len);
+//	if (!map)
+//		return (-1);
+//	while (++i != line_count)
+//		ft_bdot((char *)*map[i], line_count);
+//	return (1);
+//}
+int	allocate_map(char ***map, int line_count, int line_len)
+{
+	int	i;
+
+	i = 0;
+	*map = (char **)malloc(sizeof(char *) * line_count);
+	if (!(*map))
+		return (0);
+	while (i != line_count)
+	{
+		(*map)[i] = ft_strnew(line_len);
+		if (!(*map)[i])
+			return (0);
+		ft_bdot((*map)[i], line_len);
+		i++;
+	}
 	return (1);
 }
 
@@ -41,10 +59,6 @@ int	print_solution(t_tetrimino *list, int side)
 	int		line;
 	int		bit_index;
 	int		char_index;
-
-	//map = allocate_map(side, side);
-	//if (!map)
-	//	return (-1);
 
 	if (!allocate_map(&map, side, side))
 		return (-1);
