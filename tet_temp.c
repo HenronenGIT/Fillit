@@ -58,9 +58,9 @@ int	line_check(const char *line, int line_counter)
 
 	if (line_counter == 4)
 	{
-		if (*line != '\0')
-			return (0);
-		return (input);
+		if (line == NULL || *line == '\0')
+			return (input);
+		return (0);
 	}
 	if (ft_strlen(line) != 4)
 		return (0);
@@ -102,7 +102,7 @@ t_tetrimino	*tetrimino_check(const int fd)
 				return (NULL);
 			line_counter++;
 		}
-		free(line);
+		ft_strdel(&line);
 	}
 	if (line_counter != 4)
 		return (NULL);
