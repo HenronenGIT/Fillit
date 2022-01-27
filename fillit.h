@@ -36,26 +36,3 @@ int			mapper(t_tetrimino *list, int side);
 int			map_estimater(t_tetrimino *list);
 int			print_solution(t_tetrimino *list, int side);
 #endif
-
-/*
-void	set_letters(t_tetrimino *list, char **map, int side)
-{
-	size_t	i;
-	int		bit_index;
-	int		char_index;
-	
-	i = -1;
-	while (++i != 4)
-	{
-		char_index = -1;
-		bit_index = 16;
-		while (++char_index != side && --bit_index)
-		{
-			if (list->shape[i] & (1 << (bit_index)))
-				map[line][char_index] = 'A' + list->order;
-		}
-		line++;
-	}
-
-}
-*/
