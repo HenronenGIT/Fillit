@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+//temp
+#include <stdio.h>
+//temp
 
 void	move_line_down(t_tetrimino *list, int side)
 {
@@ -66,11 +69,9 @@ void	move_tetrimino(t_tetrimino *list, int side)
 int	mapper(t_tetrimino *list, int side)
 {
 	int						line;
-	int						temp;
 	static unsigned short	map[16];
 
 	line = 0;
-	temp = 0;
 	while (list)
 	{
 		if (((map[line] | list->shape[line]) != (map[line] + list->shape[line]))
@@ -89,12 +90,9 @@ int	mapper(t_tetrimino *list, int side)
 			{
 				if (list->order == 0)
 					side++;
-				list->shape = (unsigned short *)malloc(2 * side);
-				while (++line < side)
-					list->shape[line] = 0;
-				line = -1;
-				while (list->reset[++line])
-					list->shape[line] = list->reset[line];
+				list->shape = (unsigned short *)malloc(sizeof(unsigned short) * side);
+				ft_bzero(list->shape, side * 2);
+				ft_memmove(list->shape, list->reset, sizeof(list->reset));
 				if (list->order > 0)
 					return (0);
 				line = -1;

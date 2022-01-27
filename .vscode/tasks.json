@@ -13,7 +13,11 @@
                 "-Werror",
                 "-I./libft/includes",
                 "-I./",
-                "${workspaceFolder}/*.c",
+                "${workspaceFolder}/main.c",
+                "${workspaceFolder}/new_mapper.c",
+                "${workspaceFolder}/print_solution.c",
+                "${workspaceFolder}/tetrimino_check.c",
+                "${workspaceFolder}/map_estimater.c",
                 //"${workspaceFolder}/libft/*.c",
                 "-o",
                 "${workspaceFolder}/fillit"

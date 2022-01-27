@@ -53,14 +53,41 @@ int	print_solution(t_tetrimino *list, int side)
 	while (list)
 	{
 		line = -1;
-		while (++line != side)
+		while (++line < side)
 		{
-			char_index = -1;
-			bit_index = 16;
-			while (++char_index != side && --bit_index)
+			if (line == list->line)
 			{
-				if (list->shape[line] & (1 << (bit_index)))
-					map[line][char_index] = 'A' + list->order;
+				char_index = -1;
+				bit_index = 16;
+				while (++char_index != side && --bit_index)
+				{
+					if (list->shape[0] & (1 << (bit_index)))
+						map[line][char_index] = 'A' + list->order;
+				}
+				line++;
+				char_index = -1;
+				bit_index = 16;
+				while (++char_index != side && --bit_index)
+				{
+					if (list->shape[1] & (1 << (bit_index)))
+						map[line][char_index] = 'A' + list->order;
+				}
+				line++;
+				char_index = -1;
+				bit_index = 16;
+				while (++char_index != side && --bit_index)
+				{
+					if (list->shape[2] & (1 << (bit_index)))
+						map[line][char_index] = 'A' + list->order;
+				}
+				line++;
+				char_index = -1;
+				bit_index = 16;
+				while (++char_index != side && --bit_index)
+				{
+					if (list->shape[3] & (1 << (bit_index)))
+						map[line][char_index] = 'A' + list->order;
+				}
 			}
 		}
 		list = list->next;

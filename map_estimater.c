@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void	set_list(t_tetrimino *list, int side)
+void	set_list(t_tetrimino *list)
 {
 	int	i;
 	int	j;
@@ -20,8 +20,8 @@ void	set_list(t_tetrimino *list, int side)
 
 	while (list)
 	{
-		list->shape = (unsigned short *)malloc(sizeof(unsigned short) * side);
-		ft_bzero(list->shape, side * 2);
+		list->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
+		ft_bzero(list->shape, 8);
 		offset = 0;
 		i = 16;
 		j = 0;
@@ -34,9 +34,9 @@ void	set_list(t_tetrimino *list, int side)
 			if (i % 4 == 0)
 				j++;
 		}
-		list->reset = (unsigned short *)malloc(sizeof(unsigned short) * side);
-		ft_bzero(list->reset, side * 2);
-		ft_memcpy(list->reset, list->shape, side * 2);
+		list->reset = (unsigned short *)malloc(sizeof(unsigned short) * 4);
+		ft_bzero(list->reset, 8);
+		ft_memmove(list->reset, list->shape, sizeof(list->shape));
 		list = list->next;
 	}
 }
@@ -82,6 +82,6 @@ int	map_estimater(t_tetrimino *list)
 	side = ft_sqrt(multiplication);
 	if (piece_count < 3 && check == 1)
 		side = 4;
-	set_list(head, side);
+	set_list(head);
 	return (side);
 }
