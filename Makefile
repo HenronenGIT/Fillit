@@ -14,7 +14,7 @@ NAME = fillit
 
 #Compilation and flags
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -Wconversion
 
 #Source files
 SRC = ./main.c ./tetrimino_check.c ./mapper.c ./map_estimater.c	\

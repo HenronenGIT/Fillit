@@ -19,6 +19,7 @@
 
 # define TOP_ALL 61440
 # define LEFT_ALL 34952
+# define LEFTMOST_BIT 32768
 
 typedef struct s_tetrimino
 {

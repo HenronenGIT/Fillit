@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mapper.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 11:00:45 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/01/28 11:00:48 by hmaronen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int	mapper(t_tetrimino *list, int side)
@@ -17,10 +29,10 @@ int	mapper(t_tetrimino *list, int side)
 			list->shape[1] = list->shape[1] >> 1;
 			list->shape[2] = list->shape[2] >> 1;
 			list->shape[3] = list->shape[3] >> 1;
-			if (list->shape[0] & 32768 >> side
-				|| list->shape[1] & 32768 >> side
-				|| list->shape[2] & 32768 >> side
-				|| list->shape[3] & 32768 >> side)
+			if (list->shape[0] & LEFTMOST_BIT >> side
+				|| list->shape[1] & LEFTMOST_BIT >> side
+				|| list->shape[2] & LEFTMOST_BIT >> side
+				|| list->shape[3] & LEFTMOST_BIT >> side)
 			{
 				ft_bzero(list->shape, 8);
 				ft_memmove(list->shape, list->reset, 8);
@@ -64,7 +76,10 @@ int	mapper(t_tetrimino *list, int side)
 				list->shape[1] = list->shape[1] >> 1;
 				list->shape[2] = list->shape[2] >> 1;
 				list->shape[3] = list->shape[3] >> 1;
-				if (list->shape[0] & 32768 >> side || list->shape[1] & 32768 >> side || list->shape[2] & 32768 >> side || list->shape[3] & 32768 >> side)
+				if (list->shape[0] & LEFTMOST_BIT >> side
+					|| list->shape[1] & LEFTMOST_BIT >> side
+					|| list->shape[2] & LEFTMOST_BIT >> side
+					|| list->shape[3] & LEFTMOST_BIT >> side)
 				{
 					ft_bzero(list->shape, 8);
 					ft_memmove(list->shape, list->reset, 8);
