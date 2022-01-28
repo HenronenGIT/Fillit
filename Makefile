@@ -21,7 +21,6 @@ SRC = ./main.c ./tetrimino_check.c ./mapper.c ./map_estimater.c	\
 ./print_solution.c ./get_next_line.c
 	
 OBJ = $(SRC:.c=.o)
-#TEST_PATH = ./tests
 
 #Includes
 HEADERS = $(GNL_H) $(LIBFT_H) $(FILLIT_H) 
