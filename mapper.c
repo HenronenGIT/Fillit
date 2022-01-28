@@ -12,12 +12,12 @@
 
 #include "fillit.h"
 
-void	put_to_map(t_tetrimino *list, unsigned short *map, int line)
+void	put_to_map(t_tetrimino *list, unsigned short *map)
 {
-	map[line] = map[line] | list->shape[0];
-	map[line + 1] = map[line + 1] | list->shape[1];
-	map[line + 2] = map[line + 2] | list->shape[2];
-	map[line + 3] = map[line + 3] | list->shape[3];
+	map[list->line] = map[list->line] | list->shape[0];
+	map[list->line + 1] = map[list->line + 1] | list->shape[1];
+	map[list->line + 2] = map[list->line + 2] | list->shape[2];
+	map[list->line + 3] = map[list->line + 3] | list->shape[3];
 }
 
 void	remove_tetrimino(unsigned short *shape, unsigned short *map, int line)
@@ -36,7 +36,7 @@ void	reset_tetrimino(unsigned short *shape, unsigned short *reset)
 	shape[3] = reset[3];
 }
 
-int shift_right_check_fit(t_tetrimino *list, int side, int line)
+int	shift_right_check_fit(t_tetrimino *list, int side)
 {
 	list->shape[0] = list->shape[0] >> 1;
 	list->shape[1] = list->shape[1] >> 1;
@@ -46,48 +46,40 @@ int shift_right_check_fit(t_tetrimino *list, int side, int line)
 		|| list->shape[2] & 32768 >> side || list->shape[3] & 32768 >> side)
 	{
 		reset_tetrimino(list->shape, list->reset);
-		line++;
+		list->line++;
 	}
-	if ((list->shape[0] && line >= side)
-		|| (list->shape[1] && line + 1 >= side)
-		|| (list->shape[2] && line + 2 >= side)
-		|| (list->shape[3] && line + 3 >= side))
+	if ((list->shape[0] && list->line >= side)
+		|| (list->shape[1] && list->line + 1 >= side)
+		|| (list->shape[2] && list->line + 2 >= side)
+		|| (list->shape[3] && list->line + 3 >= side))
 	{
 		reset_tetrimino(list->shape, list->reset);
-		return (-1);
+		return (0);
 	}
-	return (line);
+	return (1);
 }
 
 int	mapper(t_tetrimino *list, int side)
 {
-	int						line;
 	static unsigned short	map[16];
 
-	line = 0;
 	while (list)
 	{
-		if (list == NULL)
-			return (side);
-		if (((map[line] & list->shape[0]) == 0)
-			&& ((map[line + 1] & list->shape[1]) == 0)
-			&& ((map[line + 2] & list->shape[2]) == 0)
-			&& ((map[line + 3] & list->shape[3]) == 0))
+		if (((map[list->line] & list->shape[0]) == 0)
+			&& ((map[list->line + 1] & list->shape[1]) == 0)
+			&& ((map[list->line + 2] & list->shape[2]) == 0)
+			&& ((map[list->line + 3] & list->shape[3]) == 0))
 		{
-			put_to_map(list, map, line);
+			put_to_map(list, map);
 			if (mapper(list->next, side))
-			{
-				list->line = line;
 				return (side);
-			}
-			remove_tetrimino(list->shape, map, line);
+			remove_tetrimino(list->shape, map, list->line);
 		}
-		line = shift_right_check_fit(list, side, line);
-		if (line == -1)
+		if (shift_right_check_fit(list, side) == 0)
 		{
 			if (list->order > 0)
 				return (0);
-			line = 0;
+			list->line = 0;
 			side++;
 		}
 	}
