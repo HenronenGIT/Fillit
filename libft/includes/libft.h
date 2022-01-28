@@ -98,5 +98,4 @@ int		ft_get_next_line(const int fd, char **line);
 
 char	**ft_arrnew(size_t str_count, size_t str_len);
 void	ft_free_2d_array(char **array);
-
 #endif
