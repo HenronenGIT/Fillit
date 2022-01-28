@@ -14,7 +14,7 @@
                 "-I./libft/includes",
                 "-I./",
                 "${workspaceFolder}/main.c",
-                "${workspaceFolder}/new_mapper.c",
+                "${workspaceFolder}/mapper.c",
                 "${workspaceFolder}/print_solution.c",
                 "${workspaceFolder}/tetrimino_check.c",
                 "${workspaceFolder}/map_estimater.c",

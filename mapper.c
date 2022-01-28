@@ -77,9 +77,9 @@ int	mapper(t_tetrimino *list, int side)
 		}
 		if (shift_right_check_fit(list, side) == 0)
 		{
+			list->line = 0;
 			if (list->order > 0)
 				return (0);
-			list->line = 0;
 			side++;
 		}
 	}
