@@ -6,6 +6,7 @@
 		"locale": "c",
 		"memory": "c",
 		"optional": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"fillit.h": "c"
 	}
 }

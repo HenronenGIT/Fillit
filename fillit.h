@@ -36,4 +36,5 @@ t_tetrimino	*tetrimino_check(const int fd);
 int			mapper(t_tetrimino *list, int side);
 int			map_estimater(t_tetrimino *list);
 int			print_solution(t_tetrimino *list, int side);
+int			get_next_line(const int fd, char **line);
 #endif

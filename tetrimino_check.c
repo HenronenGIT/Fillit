@@ -73,18 +73,17 @@ int	line_check(const char *line, int line_counter)
 			return (input);
 		return (0);
 	}
-	if (ft_strlen(line) != 4)
+	if (ft_strlen(line) != 5)
 		return (0);
 	if (line_counter == 0)
 		input = 0;
-	count = 0;
-	while (line[count])
+	count = -1;
+	while (line[++count] != '\n')
 	{
-		if (line[count] != '#' && line[count] != '.')
+		if (line[count] != '#' && line[count] != '.' && line[count] != '\n')
 			return (0);
 		else if (line[count] == '#')
 			input = input | 1 << (15 - 4 * line_counter - count);
-		count++;
 	}
 	if (line_counter == 3)
 		return (input);
@@ -98,7 +97,7 @@ t_tetrimino	*tetrimino_check(const int fd)
 	t_tetrimino	*list;
 
 	line_counter = 0;
-	while (ft_get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
 		if (line_counter == 4)
 		{
