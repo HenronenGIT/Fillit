@@ -1,3 +1,5 @@
+
+   
 {
 	// Use IntelliSense to learn about possible attributes.
 	// Hover to view descriptions of existing attributes.
@@ -11,9 +13,11 @@
 			"program": "${workspaceFolder}/fillit",
 			//"args": ["./eval_tests/valid_file/test.txt"],
 			//"args": ["./eval_tests/valid_file/max.txt"],
-			//"args": ["./eval_tests/valid_file/1_tetrimino.txt"],
+			//"args": ["./eval_tests/valid_file/1_tetriminos.txt"],
 			//"args": ["./eval_tests/valid_file/2_tetriminos.txt"],
+			//"args": ["./eval_tests/valid_file/custom_tetriminos.txt"],
 			"args": ["./eval_tests/valid_file/custom_tetriminos.txt"],
+			//"args": ["./eval_tests/valid_file/3_tetriminos.txt"],
 			//"args": ["test1"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

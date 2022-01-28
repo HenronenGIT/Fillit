@@ -1,3 +1,4 @@
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -18,10 +19,9 @@ FLAGS = -Wall -Wextra -Werror
 
 #Source files
 SRC = ./main.c ./tetrimino_check.c ./mapper.c ./map_estimater.c	\
-./print_solution.c
+./print_solution.c ./get_next_line.c
 	
 OBJ = $(SRC:.c=.o)
-#TEST_PATH = ./tests
 
 #Includes
 HEADERS = $(GNL_H) $(LIBFT_H) $(FILLIT_H) 
@@ -29,7 +29,7 @@ LIBFT_H = -I ./libft/includes
 FILLIT_H = -I ./
 
 #Paths
-FILE_PATH = ./eval_tests/valid_file/
+FILE_PATH = ./eval_tests/test_files/valid_file/
 
 #Library
 LIB = -L ./libft -lft

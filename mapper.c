@@ -12,80 +12,75 @@
 
 #include "fillit.h"
 
+void	put_to_map(t_tetrimino *list, unsigned short *map)
+{
+	map[list->line] = map[list->line] | list->shape[0];
+	map[list->line + 1] = map[list->line + 1] | list->shape[1];
+	map[list->line + 2] = map[list->line + 2] | list->shape[2];
+	map[list->line + 3] = map[list->line + 3] | list->shape[3];
+}
+
+void	remove_tetrimino(unsigned short *shape, unsigned short *map, int line)
+{
+	map[line] = map[line] ^ shape[0];
+	map[line + 1] = map[line + 1] ^ shape[1];
+	map[line + 2] = map[line + 2] ^ shape[2];
+	map[line + 3] = map[line + 3] ^ shape[3];
+}
+
+void	reset_tetrimino(unsigned short *shape, unsigned short *reset)
+{
+	shape[0] = reset[0];
+	shape[1] = reset[1];
+	shape[2] = reset[2];
+	shape[3] = reset[3];
+}
+
+int	shift_right_check_fit(t_tetrimino *list, int side)
+{
+	list->shape[0] = list->shape[0] >> 1;
+	list->shape[1] = list->shape[1] >> 1;
+	list->shape[2] = list->shape[2] >> 1;
+	list->shape[3] = list->shape[3] >> 1;
+	if (list->shape[0] & LFT_BIT >> side || list->shape[1] & LFT_BIT >> side
+		|| list->shape[2] & LFT_BIT >> side || list->shape[3] & LFT_BIT >> side)
+	{
+		reset_tetrimino(list->shape, list->reset);
+		list->line++;
+	}
+	if ((list->shape[0] && list->line >= side)
+		|| (list->shape[1] && list->line + 1 >= side)
+		|| (list->shape[2] && list->line + 2 >= side)
+		|| (list->shape[3] && list->line + 3 >= side))
+	{
+		reset_tetrimino(list->shape, list->reset);
+		return (0);
+	}
+	return (1);
+}
+
 int	mapper(t_tetrimino *list, int side)
 {
-	int						line;
 	static unsigned short	map[16];
 
-	line = 0;
 	while (list)
 	{
-		if (((map[line] | list->shape[0]) != (map[line] + list->shape[0]))
-			|| ((map[line + 1] | list->shape[1]) != (map[line + 1] + list->shape[1]))
-			|| ((map[line + 2] | list->shape[2]) != (map[line + 2] + list->shape[2]))
-			|| ((map[line + 3] | list->shape[3]) != (map[line + 3] + list->shape[3])))
+		if (((map[list->line] & list->shape[0]) == 0)
+			&& ((map[list->line + 1] & list->shape[1]) == 0)
+			&& ((map[list->line + 2] & list->shape[2]) == 0)
+			&& ((map[list->line + 3] & list->shape[3]) == 0))
 		{
-			list->shape[0] = list->shape[0] >> 1;
-			list->shape[1] = list->shape[1] >> 1;
-			list->shape[2] = list->shape[2] >> 1;
-			list->shape[3] = list->shape[3] >> 1;
-			if (list->shape[0] & LEFTMOST_BIT >> side
-				|| list->shape[1] & LEFTMOST_BIT >> side
-				|| list->shape[2] & LEFTMOST_BIT >> side
-				|| list->shape[3] & LEFTMOST_BIT >> side)
-			{
-				ft_bzero(list->shape, 8);
-				ft_memmove(list->shape, list->reset, 8);
-				line++;
-			}
+			put_to_map(list, map);
+			if (mapper(list->next, side))
+				return (side);
+			remove_tetrimino(list->shape, map, list->line);
 		}
-		else
+		if (shift_right_check_fit(list, side) == 0)
 		{
-			map[line] = map[line] | list->shape[0];
-			map[line + 1] = map[line + 1] | list->shape[1];
-			map[line + 2] = map[line + 2] | list->shape[2];
-			map[line + 3] = map[line + 3] | list->shape[3];
-			if (map[side])
-			{
-				map[line] = map[line] ^ list->shape[0];
-				map[line + 1] = map[line + 1] ^ list->shape[1];
-				map[line + 2] = map[line + 2] ^ list->shape[2];
-				map[line + 3] = map[line + 3] ^ list->shape[3];
-				if (list->order == 0)
-				{
-					ft_bzero(list->shape, 8);
-					ft_memmove(list->shape, list->reset, 8);
-					side++;
-					line = 0;
-				}
-				else
-					return (0);
-			}
-			else
-			{
-				if (mapper(list->next, side))
-				{
-					list->line = line;
-					return (side);
-				}
-				map[line] = map[line] ^ list->shape[0];
-				map[line + 1] = map[line + 1] ^ list->shape[1];
-				map[line + 2] = map[line + 2] ^ list->shape[2];
-				map[line + 3] = map[line + 3] ^ list->shape[3];
-				list->shape[0] = list->shape[0] >> 1;
-				list->shape[1] = list->shape[1] >> 1;
-				list->shape[2] = list->shape[2] >> 1;
-				list->shape[3] = list->shape[3] >> 1;
-				if (list->shape[0] & LEFTMOST_BIT >> side
-					|| list->shape[1] & LEFTMOST_BIT >> side
-					|| list->shape[2] & LEFTMOST_BIT >> side
-					|| list->shape[3] & LEFTMOST_BIT >> side)
-				{
-					ft_bzero(list->shape, 8);
-					ft_memmove(list->shape, list->reset, 8);
-					line++;
-				}
-			}
+			list->line = 0;
+			if (list->order > 0)
+				return (0);
+			side++;
 		}
 	}
 	return (side);
