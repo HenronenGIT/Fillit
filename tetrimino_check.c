@@ -32,12 +32,14 @@ t_tetrimino	*save_tetrimino(unsigned short tetrimino)
 	{
 		list = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 		list->value = tetrimino;
+		list->line = 0;
 		list->next = NULL;
 	}
 	else
 	{
 		new = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 		new->value = tetrimino;
+		list->line = 0;
 		list_add_back(&list, new);
 	}
 	return (list);
