@@ -42,8 +42,8 @@ int	shift_right_check_fit(t_tetrimino *list, int side)
 	list->shape[1] = list->shape[1] >> 1;
 	list->shape[2] = list->shape[2] >> 1;
 	list->shape[3] = list->shape[3] >> 1;
-	if (list->shape[0] & 32768 >> side || list->shape[1] & 32768 >> side
-		|| list->shape[2] & 32768 >> side || list->shape[3] & 32768 >> side)
+	if (list->shape[0] & LFT_BIT >> side || list->shape[1] & LFT_BIT >> side
+		|| list->shape[2] & LFT_BIT >> side || list->shape[3] & LFT_BIT >> side)
 	{
 		reset_tetrimino(list->shape, list->reset);
 		list->line++;
