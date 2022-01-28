@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   mapper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmaronen <hmaronen@studenqqqt.hive.fi>        +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 11:00:45 by hmaronen          #+#    #+#             */
 /*   Updated: 2022/01/28 11:00:48 by hmaronen         ###   ########.fr       */
