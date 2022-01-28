@@ -41,12 +41,30 @@ int	allocate_map(char ***map, int line_count, int line_len)
 	return (1);
 }
 
+void	set_letters(char **map, t_tetrimino *list, int side, int line)
+{
+	int		bit_index;
+	int		char_index;
+	size_t	i;
+
+	i = -1;
+	while (++i != 4)
+	{
+		char_index = -1;
+		bit_index = 16;
+		while (++char_index != side && --bit_index)
+		{
+			if (list->shape[i] & (1 << (bit_index)))
+				map[line][char_index] = 'A' + list->order;
+		}
+		line++;
+	}
+}
+
 int	print_solution(t_tetrimino *list, int side)
 {
 	char	**map;
 	int		line;
-	int		bit_index;
-	int		char_index;
 
 	if (!allocate_map(&map, side, side))
 		return (0);
@@ -56,43 +74,11 @@ int	print_solution(t_tetrimino *list, int side)
 		while (++line < side)
 		{
 			if (line == list->line)
-			{
-				char_index = -1;
-				bit_index = 16;
-				while (++char_index != side && --bit_index)
-				{
-					if (list->shape[0] & (1 << (bit_index)))
-						map[line][char_index] = 'A' + list->order;
-				}
-				line++;
-				char_index = -1;
-				bit_index = 16;
-				while (++char_index != side && --bit_index)
-				{
-					if (list->shape[1] & (1 << (bit_index)))
-						map[line][char_index] = 'A' + list->order;
-				}
-				line++;
-				char_index = -1;
-				bit_index = 16;
-				while (++char_index != side && --bit_index)
-				{
-					if (list->shape[2] & (1 << (bit_index)))
-						map[line][char_index] = 'A' + list->order;
-				}
-				line++;
-				char_index = -1;
-				bit_index = 16;
-				while (++char_index != side && --bit_index)
-				{
-					if (list->shape[3] & (1 << (bit_index)))
-						map[line][char_index] = 'A' + list->order;
-				}
-			}
+				set_letters(map, list, side, line);
 		}
 		list = list->next;
 	}
- 	ft_print_array(map);
+	ft_print_array(map);
 	ft_free_2d_array(map);
 	return (1);
 }
