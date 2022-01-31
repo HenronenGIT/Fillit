@@ -12,6 +12,13 @@
 
 #include "fillit.h"
 
+t_tetrimino	*free_line(char **line)
+{
+	if (line != NULL)
+		ft_strdel(line);
+	return (NULL);
+}
+
 void	list_add_back(t_tetrimino **list, t_tetrimino *new)
 {
 	t_tetrimino	*temp;
@@ -65,7 +72,7 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 	return (NULL);
 }
 
-int	line_check(const char *line, int line_counter)
+int	line_check(char *line, int line_counter)
 {
 	int				count;
 	static int		input;
@@ -98,24 +105,25 @@ t_tetrimino	*tetrimino_check(const int fd)
 	t_tetrimino	*list;
 
 	line_counter = 0;
+	line = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (line_counter == 4)
 		{
 			list = valid_tetrimino(line_check(line, line_counter));
 			if (!(list))
-				return (NULL);
+				return (free_line(&line));
 			line_counter = 0;
 		}
 		else
 		{
 			if (!line_check(line, line_counter))
-				return (NULL);
+				return (free_line(&line));
 			line_counter++;
 		}
 		ft_strdel(&line);
 	}
 	if (line_counter != 4)
-		return (NULL);
+		return (free_line(&line));
 	return (valid_tetrimino(line_check(line, line_counter)));
 }
