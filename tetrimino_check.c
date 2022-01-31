@@ -54,13 +54,13 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 		tetrimino = tetrimino << 4;
 	while (!(tetrimino & LEFT_ALL))
 		tetrimino = tetrimino << 1;
-	if (tetrimino == 34952 || tetrimino == 61440 || tetrimino == 52224
-		|| tetrimino == 27648 || tetrimino == 35904 || tetrimino == 50688
-		|| tetrimino == 19584 || tetrimino == 35008 || tetrimino == 59392
-		|| tetrimino == 50240 || tetrimino == 11776 || tetrimino == 17600
-		|| tetrimino == 36352 || tetrimino == 51328 || tetrimino == 57856
-		|| tetrimino == 58368 || tetrimino == 19520 || tetrimino == 19968
-		|| tetrimino == 35968)
+	if (tetrimino == LEFT_ALL || tetrimino == TOP_ALL || tetrimino == SQUARE
+		|| tetrimino == S_NORM || tetrimino == S_NORM_R || tetrimino == S_MIR
+		|| tetrimino == S_OPP_R || tetrimino == L_MIR || tetrimino == L_R
+		|| tetrimino == L_UP || tetrimino == L_MIR_L || tetrimino == L_NORM
+		|| tetrimino == L_MIR_R || tetrimino == L_MIR_UP || tetrimino == L_L
+		|| tetrimino == T_NORM || tetrimino == T_R || tetrimino == T_UP
+		|| tetrimino == T_L)
 		return (save_tetrimino(tetrimino));
 	return (NULL);
 }
