@@ -47,6 +47,7 @@ t_tetrimino	*save_tetrimino(unsigned short tetrimino)
 
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 {
+	//define minos
 	if (tetrimino == 0)
 		return (NULL);
 	while (!(tetrimino & TOP_ALL))
@@ -87,8 +88,6 @@ int	line_check(const char *line, int line_counter)
 		else if (line[count] == '#')
 			input = input | 1 << (15 - 4 * line_counter - count);
 	}
-	if (line_counter == 3)
-		return (input);
 	return (1);
 }
 

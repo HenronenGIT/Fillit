@@ -64,10 +64,9 @@ int	map_estimater(t_tetrimino *list)
 	int			multiplication;
 	t_tetrimino	*head;
 
-	piece_count = 0;
+	piece_count = -1;
 	head = list;
 	piece_count = 0;
-	multiplication = 0;
 	while (list)
 	{
 		list->order = piece_count;
@@ -76,6 +75,8 @@ int	map_estimater(t_tetrimino *list)
 	}
 	multiplication = (piece_count * 4);
 	side = ft_sqrt(multiplication);
+	if (piece_count > 26)
+		exit(0);
 	set_list(head);
 	return (side);
 }

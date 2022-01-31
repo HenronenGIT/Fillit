@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"availability.h": "c",
+		"cstdlib": "c",
+		"locale": "c"
+	}
+}
