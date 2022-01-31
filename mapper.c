@@ -12,12 +12,18 @@
 
 #include "fillit.h"
 
-void	put_to_map(t_tetrimino *list, unsigned short *map)
+int	put_to_map(t_tetrimino *list, unsigned short *map, int side)
 {
+	if (side < 4 && (list->shape[side] || (list->shape[0] & LFT_BIT >> side)
+			|| (list->shape[1] & LFT_BIT >> side)
+			|| (list->shape[2] & LFT_BIT >> side)
+			|| (list->shape[3] & LFT_BIT >> side)))
+		return (0);
 	map[list->line] = map[list->line] | list->shape[0];
 	map[list->line + 1] = map[list->line + 1] | list->shape[1];
 	map[list->line + 2] = map[list->line + 2] | list->shape[2];
 	map[list->line + 3] = map[list->line + 3] | list->shape[3];
+	return (1);
 }
 
 void	remove_tetrimino(unsigned short *shape, unsigned short *map, int line)
@@ -70,7 +76,8 @@ int	mapper(t_tetrimino *list, int side)
 			&& ((map[list->line + 2] & list->shape[2]) == 0)
 			&& ((map[list->line + 3] & list->shape[3]) == 0))
 		{
-			put_to_map(list, map);
+			while (put_to_map(list, map, side) == 0)
+				side++;
 			if (mapper(list->next, side))
 				return (side);
 			remove_tetrimino(list->shape, map, list->line);
