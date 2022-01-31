@@ -88,8 +88,6 @@ int	line_check(const char *line, int line_counter)
 		else if (line[count] == '#')
 			input = input | 1 << (15 - 4 * line_counter - count);
 	}
-	if (line_counter == 3)
-		return (input);
 	return (1);
 }
 

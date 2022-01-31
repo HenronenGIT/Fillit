@@ -31,10 +31,7 @@ int	main(int argc, char **argv)
 		return (error_handler(1));
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr("open() error in main\n");
-		return (1);
-	}
+		return (error_handler(2));
 	list = tetrimino_check(fd);
 	if (!(list))
 		return (error_handler(2));
