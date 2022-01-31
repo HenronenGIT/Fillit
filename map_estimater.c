@@ -72,8 +72,7 @@ int	map_estimater(t_tetrimino *list)
 	check = 0;
 	while (list)
 	{
-		if (list->value == 61440 || list->value == 34952)
-			check = 1;
+		check = (list->value == 61440 || list->value == 34952);
 		list->order = piece_count;
 		list = list->next;
 		piece_count++;
