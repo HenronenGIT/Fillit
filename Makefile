@@ -41,7 +41,7 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	@@make -C ./libft/ $(LIBFT_H) fclean && make -C ./libft/ $(LIBFT_H)
-	@@$(CC) $(FLAGS) $(LIB) $(HEADERS) $(SRC) -o $(NAME)
+	@@$(CC) $(FLAGS) $(HEADERS) $(SRC) -o $(NAME) $(LIB)
 
 clean:
 	@@$(RM) $(OBJ)
