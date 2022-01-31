@@ -39,6 +39,8 @@ int	main(int argc, char **argv)
 	if (!(list))
 		return (error_handler(2));
 	side = map_estimater(list);
+	if (!side)
+		return (error_handler(2));
 	side = mapper(list, side);
 	if (!print_solution(list, side))
 		return (error_handler(2));

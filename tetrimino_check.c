@@ -47,6 +47,7 @@ t_tetrimino	*save_tetrimino(unsigned short tetrimino)
 
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 {
+	//define minos
 	if (tetrimino == 0)
 		return (NULL);
 	while (!(tetrimino & TOP_ALL))

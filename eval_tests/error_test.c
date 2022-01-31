@@ -51,4 +51,5 @@ int main(void)
 		system("./fillit ./eval_tests/test_files/error_file/error_26");
 		system("./fillit ./eval_tests/test_files/error_file/error_27");
 		system("./fillit ./eval_tests/test_files/error_file/error_28");
+		system("./fillit ./eval_tests/test_files/error_file/error_29");
 }

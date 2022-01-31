@@ -51,8 +51,14 @@ fclean: clean
 
 re: fclean all
 
-1:
-	./fillit $(FILE_PATH)1_tetriminos.txt
+11:
+	./fillit $(FILE_PATH)1_tetriminos_1.txt
+12:
+	./fillit $(FILE_PATH)1_tetriminos_2.txt
+13:
+	./fillit $(FILE_PATH)1_tetriminos_3.txt
+14:
+	./fillit $(FILE_PATH)1_tetriminos_4.txt
 2:
 	./fillit $(FILE_PATH)2_tetriminos.txt
 3:
