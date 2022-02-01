@@ -41,15 +41,15 @@
 
 typedef struct s_tetrimino
 {
-	unsigned short		*shape;
+	unsigned short		shape[4];
 	unsigned int		order;
-	unsigned short		*reset;
+	unsigned short		reset[4];
 	unsigned short		value;
 	int					line;
 	struct s_tetrimino	*next;
 }						t_tetrimino;
 
-int			error_handler(int nb);
+int			error_handler(int nb, t_tetrimino **list);
 int			tetrimino_check(const int fd, t_tetrimino **list);
 int			mapper(t_tetrimino *list, int side);
 int			map_estimater(t_tetrimino *list);
