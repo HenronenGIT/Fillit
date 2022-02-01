@@ -12,44 +12,42 @@
 
 #include "fillit.h"
 
-t_tetrimino	*free_line(char **line)
+int	free_line(char **line)
 {
 	if (line != NULL)
 		ft_strdel(line);
-	return (NULL);
+	return (0);
 }
 
-t_tetrimino	*save_tetrimino(unsigned short tetrimino)
+void	save_tetrimino(unsigned short tetrimino, t_tetrimino **list)
 {
-	static t_tetrimino	*list;
 	t_tetrimino			*new;
 	t_tetrimino			*temp;
 
-	if (list == NULL)
+	if (*list == NULL)
 	{
-		list = (t_tetrimino *)malloc(sizeof(t_tetrimino));
-		list->value = tetrimino;
-		list->line = 0;
-		list->next = NULL;
+		*list = (t_tetrimino *)malloc(sizeof(t_tetrimino));
+		(*list)->value = tetrimino;
+		(*list)->line = 0;
+		(*list)->next = NULL;
 	}
 	else
 	{
 		new = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 		new->value = tetrimino;
-		list->line = 0;
-		temp = list;
+		new->line = 0;
+		temp = *list;
 		while (temp->next != NULL)
 			temp = temp->next;
 		temp->next = new;
 		new->next = NULL;
 	}
-	return (list);
 }
 
-t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
+int	valid_tetrimino(unsigned short tetrimino, t_tetrimino **list)
 {
 	if (tetrimino == 0)
-		return (NULL);
+		return (0);
 	while (!(tetrimino & TOP_ALL))
 		tetrimino = tetrimino << 4;
 	while (!(tetrimino & LEFT_ALL))
@@ -61,8 +59,11 @@ t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 		|| tetrimino == L_MIR_R || tetrimino == L_MIR_UP || tetrimino == L_L
 		|| tetrimino == T_NORM || tetrimino == T_R || tetrimino == T_UP
 		|| tetrimino == T_L)
-		return (save_tetrimino(tetrimino));
-	return (NULL);
+	{
+		save_tetrimino(tetrimino, list);
+		return (1);
+	}
+	return (0);
 }
 
 int	line_check(char *line, int line_counter)
@@ -91,20 +92,18 @@ int	line_check(char *line, int line_counter)
 	return (1);
 }
 
-t_tetrimino	*tetrimino_check(const int fd)
+int	tetrimino_check(const int fd, t_tetrimino **list)
 {
 	char		*line;
 	int			line_counter;
-	t_tetrimino	*list;
 
-	line_counter = 0;
 	line = NULL;
+	line_counter = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (line_counter == 4)
 		{
-			list = valid_tetrimino(line_check(line, line_counter));
-			if (!(list))
+			if (!(valid_tetrimino(line_check(line, line_counter), list)))
 				return (free_line(&line));
 			line_counter = 0;
 		}
@@ -118,5 +117,5 @@ t_tetrimino	*tetrimino_check(const int fd)
 	}
 	if (line_counter != 4)
 		return (free_line(&line));
-	return (valid_tetrimino(line_check(line, line_counter)));
+	return (valid_tetrimino(line_check(line, line_counter), list));
 }

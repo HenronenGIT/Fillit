@@ -50,7 +50,7 @@ typedef struct s_tetrimino
 }						t_tetrimino;
 
 int			error_handler(int nb);
-t_tetrimino	*tetrimino_check(const int fd);
+int			tetrimino_check(const int fd, t_tetrimino **list);
 int			mapper(t_tetrimino *list, int side);
 int			map_estimater(t_tetrimino *list);
 int			print_solution(t_tetrimino *list, int side);

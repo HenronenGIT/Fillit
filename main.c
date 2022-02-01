@@ -32,9 +32,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (error_handler(2));
-	list = tetrimino_check(fd);
-	system("leaks fillit");
-	if (!(list))
+	if (!(tetrimino_check(fd, &list)))
 		return (error_handler(2));
 	side = map_estimater(list);
 	if (!side)
