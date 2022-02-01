@@ -19,21 +19,11 @@ t_tetrimino	*free_line(char **line)
 	return (NULL);
 }
 
-void	list_add_back(t_tetrimino **list, t_tetrimino *new)
-{
-	t_tetrimino	*temp;
-
-	temp = *list;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = new;
-	new->next = NULL;
-}
-
 t_tetrimino	*save_tetrimino(unsigned short tetrimino)
 {
 	static t_tetrimino	*list;
 	t_tetrimino			*new;
+	t_tetrimino			*temp;
 
 	if (list == NULL)
 	{
@@ -47,14 +37,17 @@ t_tetrimino	*save_tetrimino(unsigned short tetrimino)
 		new = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 		new->value = tetrimino;
 		list->line = 0;
-		list_add_back(&list, new);
+		temp = list;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+		new->next = NULL;
 	}
 	return (list);
 }
 
 t_tetrimino	*valid_tetrimino(unsigned short tetrimino)
 {
-	//define minos
 	if (tetrimino == 0)
 		return (NULL);
 	while (!(tetrimino & TOP_ALL))
