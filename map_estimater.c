@@ -20,8 +20,7 @@ void	set_list(t_tetrimino *list)
 
 	while (list)
 	{
-		list->shape = (unsigned short *)malloc(sizeof(unsigned short) * 4);
-		ft_bzero(list->shape, 8);
+		ft_bzero(list->shape, sizeof(unsigned short) * 4);
 		offset = 0;
 		i = 16;
 		j = 0;
@@ -34,8 +33,7 @@ void	set_list(t_tetrimino *list)
 			if (i % 4 == 0)
 				j++;
 		}
-		list->reset = (unsigned short *)malloc(sizeof(unsigned short) * 4);
-		ft_bzero(list->reset, 8);
+		ft_bzero(list->reset, sizeof(unsigned short) * 4);
 		ft_memmove(list->reset, list->shape, sizeof(list->shape));
 		list = list->next;
 	}
