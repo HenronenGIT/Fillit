@@ -14,10 +14,13 @@
 
 void	free_list(t_tetrimino **list)
 {
+	t_tetrimino	*temp;
+
 	while (*list)
 	{
+		temp = (*list)->next;
 		free(*list);
-		*list = (*list)->next;
+		*list = temp;
 	}
 }
 
@@ -38,6 +41,7 @@ int	main(int argc, char **argv)
 	int				side;
 	t_tetrimino		*list;
 
+	list = NULL;
 	if (argc != 2)
 		return (error_handler(1, NULL));
 	fd = open(argv[1], O_RDONLY);

@@ -16,6 +16,7 @@ NAME = fillit
 #Compilation and flags
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
+DB_FLAG = -g $(FLAGS)
 
 #Source files
 SRC = ./main.c ./tetrimino_check.c ./mapper.c ./map_estimater.c	\
@@ -42,6 +43,10 @@ all: $(NAME)
 $(NAME): $(SRC)
 	@@make -C ./libft/ $(LIBFT_H) fclean && make -C ./libft/ $(LIBFT_H)
 	@@$(CC) $(FLAGS) $(HEADERS) $(SRC) -o $(NAME) $(LIB)
+
+debug:
+	@@make -C ./libft/ $(LIBFT_H) fclean && make -C ./libft/ $(LIBFT_H)
+	@@$(CC) $(DB_FLAG) $(HEADERS) $(SRC) -o $(NAME) $(LIB)
 
 clean:
 	@@$(RM) $(OBJ)
