@@ -60,18 +60,23 @@ int	map_estimater(t_tetrimino *list)
 	int			piece_count;
 	int			side;
 	int			multiplication;
+	int			check;
 	t_tetrimino	*head;
 
 	head = list;
+	check = 0;
 	piece_count = 0;
 	while (list)
 	{
+		check = (list->value == TOP_ALL || list->value == LEFT_ALL);
 		list->order = piece_count;
 		list = list->next;
 		piece_count++;
 	}
 	multiplication = (piece_count * 4);
 	side = ft_sqrt(multiplication);
+	if (check && piece_count < 3)
+		side = 4;
 	if (piece_count > 26)
 		return (0);
 	set_list(head);

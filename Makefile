@@ -16,7 +16,7 @@ NAME = fillit
 #Compilation and flags
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-DB_FLAG = -g $(FLAGS) -fsanitize=address
+DB_FLAG = -g $(FLAGS)
 
 #Source files
 SRC = ./main.c ./tetrimino_check.c ./mapper.c ./map_estimater.c	\

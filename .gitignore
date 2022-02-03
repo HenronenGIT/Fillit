@@ -2,3 +2,6 @@
 **fillit.dSYM/
 a.out
 fillit
+.vscode
+./libft/*.o
+./libft/libft.a
