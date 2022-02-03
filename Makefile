@@ -74,8 +74,6 @@ re: fclean all
 	./fillit $(FILE_PATH)5_tetriminos.txt
 10:
 	./fillit $(FILE_PATH)10_tetriminos.txt
-15:
-	./fillit $(FILE_PATH)15_tetriminos.txt
 custom:
 	./fillit $(FILE_PATH)custom_tetriminos.txt
 max:
