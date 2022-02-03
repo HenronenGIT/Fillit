@@ -14,10 +14,13 @@
 
 void	free_list(t_tetrimino **list)
 {
+	t_tetrimino	*temp;
+
 	while (*list)
 	{
+		temp = (*list)->next;
 		free(*list);
-		*list = (*list)->next;
+		*list = temp;
 	}
 }
 
