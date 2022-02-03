@@ -26,7 +26,7 @@ int	allocate_map(char ***map, int line_count, int line_len)
 	int	i;
 
 	i = 0;
-	*map = (char **)malloc(sizeof(char *) * (line_count + 1));//sef fault here
+	*map = (char **)malloc(sizeof(char *) * (line_count + 1));
 	if (!(*map))
 		return (0);
 	(*map)[line_count] = NULL;
