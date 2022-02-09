@@ -50,9 +50,12 @@ debug:
 
 clean:
 	@@$(RM) $(OBJ)
+	@@make clean -C ./libft/
+
 
 fclean: clean
 	@@/bin/rm -f $(NAME)
+	@@make fclean -C ./libft/
 
 re: fclean all
 
